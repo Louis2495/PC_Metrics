@@ -35,11 +35,15 @@
 <body>
     <h1>Dashboard</h1>
     <p>Stats gathered from Google Analytics</p>
+
+    <button id = "login_button" onclick="client.requestAccessToken();">
+        Log In with Google
+    </button>
     
     <div class = "cards_row">
         <div class = "metric_card">
             <h5>Visitors</h5>
-            <p>1234</p>
+            <p id = "visitors"></p>
         </div>
 
         <div class = "metric_card">
@@ -68,6 +72,56 @@
         </div>
 
     </div>
-    
+
+    <script src="https://accounts.google.com/gsi/client"></script>
+
+    <!-- https://developers.google.com/identity/oauth2/web/guides/use-token-model -->
+    <script>
+        const client = google.accounts.oauth2.initTokenClient({
+            client_id: '596258053431-on8jaoq8bv24kuqqdjrqtau1u0ni59fm.apps.googleusercontent.com',
+            scope: 'https://www.googleapis.com/auth/analytics.readonly',
+            callback: (tokenResponse) => {
+                if (tokenResponse && tokenResponse.access_token) {
+                    // https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/runReport
+                    // Creating XMLHttpRequest
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    const ask = {
+                        "metrics": [
+                            {
+                                "name": "activeUsers"
+                            }
+                        ],
+                        "dateRanges": [
+                            {
+                                "startDate": "7daysAgo",
+                                "endDate": "today"
+                            }
+                        ]
+                    };
+                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+                    const jsonMetrics = JSON.stringify(ask);
+
+                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/load_event
+                    xhr.addEventListener("load", (event) => {
+                        const response = xhr.responseText;
+                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                        const jsMetrics = JSON.parse(response);
+                        const visitors = jsMetrics.rows[0].metricValues[0].value;
+                        // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+                        document.getElementById("visitors").textContent = visitors;
+                    });                    
+
+                    xhr.send(jsonMetrics);
+                }
+            },
+        });
+
+        
+    </script>
+
 </body>
 </html>
