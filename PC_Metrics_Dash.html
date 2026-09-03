@@ -154,6 +154,37 @@
                                 "name": "userEngagementDuration"
                             }
                         ],
+
+                        "dimensions": [
+                            {
+                                "name": "browser"
+                            },
+
+                            {
+                                "name": "city"
+                            },
+
+                            {
+                                "name": "country"
+                            },
+
+                            {
+                                "name": "deviceCategory"
+                            },
+
+                            {
+                                "name": "deviceModel"
+                            },
+
+                            {
+                                "name": "userAgeBracket"
+                            },
+
+                            {
+                                "name": "userGender"
+                            }
+                        ],
+
                         "dateRanges": [
                             {
                                 "startDate": "7daysAgo",
@@ -179,6 +210,8 @@
                         const engagementRate = jsMetrics.rows[0].metricValues[7].value;
                         const bounceRate = jsMetrics.rows[0].metricValues[8].value;
                         const userEngagementDuration = jsMetrics.rows[0].metricValues[9].value;
+
+                        
 
 
                         // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
