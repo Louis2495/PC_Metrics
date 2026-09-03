@@ -71,6 +71,28 @@
             <p id = "screenPageViewsPerSession"></p>
         </div>
 
+        <div class = "metric_card">
+            <h5>Engaged Sessions</h5>
+            <p id = "engagedSessions"></p>
+        </div>
+
+        <div class = "metric_card">
+            <h5>Engagement Rate</h5>
+            <p id = "engagementRate"></p>
+        </div>
+
+        <div class = "metric_card">
+            <h5>Bounce Rate</h5>
+            <p id = "bounceRate"></p>
+        </div>
+
+        <div class = "metric_card">
+            <h5>Engagement Duration</h5>
+            <p id = "userEngagementDuration"></p>
+        </div>
+
+
+
     </div>
 
     <script src="https://accounts.google.com/gsi/client"></script>
@@ -114,6 +136,22 @@
 
                             {
                                 "name": "screenPageViewsPerSession"
+                            },
+
+                            {
+                                "name": "engagedSessions"
+                            },
+
+                            {
+                                "name": "engagementRate"
+                            },
+
+                            {
+                                "name": "bounceRate"
+                            },
+
+                            {
+                                "name": "userEngagementDuration"
                             }
                         ],
                         "dateRanges": [
@@ -137,6 +175,11 @@
                         const averageSessionDuration = jsMetrics.rows[0].metricValues[3].value;
                         const newUsers = jsMetrics.rows[0].metricValues[4].value;
                         const screenPageViewsPerSession = jsMetrics.rows[0].metricValues[5].value;
+                        const engagedSessions = jsMetrics.rows[0].metricValues[6].value;
+                        const engagementRate = jsMetrics.rows[0].metricValues[7].value;
+                        const bounceRate = jsMetrics.rows[0].metricValues[8].value;
+                        const userEngagementDuration = jsMetrics.rows[0].metricValues[9].value;
+
 
                         // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
                         document.getElementById("activeUsers").textContent = activeUsers;
@@ -145,6 +188,10 @@
                         document.getElementById("averageSessionDuration").textContent = averageSessionDuration;
                         document.getElementById("newUsers").textContent = newUsers;
                         document.getElementById("screenPageViewsPerSession").textContent = screenPageViewsPerSession;
+                        document.getElementById("engagedSessions").textContent = engagedSessions;
+                        document.getElementById("engagementRate").textContent = engagementRate;
+                        document.getElementById("bounceRate").textContent = bounceRate;
+                        document.getElementById("userEngagementDuration").textContent = userEngagementDuration;
 
                     });                    
 
