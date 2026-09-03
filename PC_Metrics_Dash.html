@@ -43,32 +43,32 @@
     <div class = "cards_row">
         <div class = "metric_card">
             <h5>Visitors</h5>
-            <p id = "visitors"></p>
+            <p id = "activeUsers"></p>
         </div>
 
         <div class = "metric_card">
             <h5>Sessions</h5>
-            <p>1111</p>
+            <p id = "sessions"></p>
         </div>
 
         <div class = "metric_card">
             <h5>Page Views</h5>
-            <p>1111</p>
+            <p id = "screenPageViews"></p>
         </div>
 
         <div class = "metric_card">
             <h5>Avg Session Length</h5>
-            <p>1111</p>
+            <p id = "averageSessionDuration"></p>
         </div>
 
         <div class = "metric_card">
             <h5>New Visitors</h5>
-            <p>1111</p>
+            <p id = "newUsers"></p>
         </div>
 
         <div class = "metric_card">
             <h5>Pages per Session</h5>
-            <p>1111</p>
+            <p id = "screenPageViewsPerSession"></p>
         </div>
 
     </div>
@@ -90,9 +90,30 @@
                     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
                     xhr.setRequestHeader('Content-Type', 'application/json');
                     const ask = {
+                        // Correct naming and allowable metrics: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
                         "metrics": [
                             {
                                 "name": "activeUsers"
+                            },
+
+                            {
+                                "name": "sessions"
+                            },
+
+                            {
+                                "name": "screenPageViews"
+                            },
+
+                            {
+                                "name": "averageSessionDuration"
+                            },
+
+                            {
+                                "name": "newUsers"
+                            },
+
+                            {
+                                "name": "screenPageViewsPerSession"
                             }
                         ],
                         "dateRanges": [
@@ -110,9 +131,21 @@
                         const response = xhr.responseText;
                         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
                         const jsMetrics = JSON.parse(response);
-                        const visitors = jsMetrics.rows[0].metricValues[0].value;
+                        const activeUsers = jsMetrics.rows[0].metricValues[0].value;
+                        const sessions = jsMetrics.rows[0].metricValues[1].value;
+                        const screenPageViews = jsMetrics.rows[0].metricValues[2].value;
+                        const averageSessionDuration = jsMetrics.rows[0].metricValues[3].value;
+                        const newUsers = jsMetrics.rows[0].metricValues[4].value;
+                        const screenPageViewsPerSession = jsMetrics.rows[0].metricValues[5].value;
+
                         // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
-                        document.getElementById("visitors").textContent = visitors;
+                        document.getElementById("activeUsers").textContent = activeUsers;
+                        document.getElementById("sessions").textContent = sessions;
+                        document.getElementById("screenPageViews").textContent = screenPageViews;
+                        document.getElementById("averageSessionDuration").textContent = averageSessionDuration;
+                        document.getElementById("newUsers").textContent = newUsers;
+                        document.getElementById("screenPageViewsPerSession").textContent = screenPageViewsPerSession;
+
                     });                    
 
                     xhr.send(jsonMetrics);
