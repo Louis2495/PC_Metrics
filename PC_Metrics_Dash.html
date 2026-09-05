@@ -8,6 +8,7 @@
         body {
             background-color: #1a1a1a;
             color: #FFFFFF;
+            text-align: center;
         }
 
         .metric_card {
@@ -24,7 +25,25 @@
             display: flex;
             gap: 20px;
         }
+        
+        #login_button {
+            width: 140px;
+            height: 40px;
+            display: block;
+            margin-top: 80px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 80px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
 
+        #google_logo {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
 
     </style>
 </head>
@@ -37,13 +56,19 @@
     <p>Stats gathered from Google Analytics</p>
 
     <button id = "login_button" onclick="client.requestAccessToken();">
-        Log In with Google
+        <img id = "google_logo" src = "google_logo.png">
+        Log In
     </button>
     
     <div class = "cards_row">
         <div class = "metric_card">
             <h5>Visitors</h5>
             <p id = "activeUsers"></p>
+        </div>
+
+        <div class = "metric_card">
+            <h5>Total Users</h5>
+            <p id = "totalUsers"></p>
         </div>
 
         <div class = "metric_card">
@@ -90,12 +115,11 @@
             <h5>Engagement Duration</h5>
             <p id = "userEngagementDuration"></p>
         </div>
-
-
-
     </div>
 
+
     <script src="https://accounts.google.com/gsi/client"></script>
+
 
     <!-- https://developers.google.com/identity/oauth2/web/guides/use-token-model -->
     <script>
@@ -155,6 +179,27 @@
                             }
                         ],
 
+                        "dateRanges": [
+                            {
+                                "startDate": "7daysAgo",
+                                "endDate": "today"
+                            }
+                        ]
+                    };
+
+                    var xhr2 = new XMLHttpRequest();
+                    xhr2.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                    xhr2.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                    xhr2.setRequestHeader('Content-Type', 'application/json');
+
+                    const ask2 = {
+                        "metrics": [
+                            {
+                                "name": "totalUsers"
+                            }
+                        ],
+
                         "dimensions": [
                             {
                                 "name": "browser"
@@ -192,8 +237,12 @@
                             }
                         ]
                     };
+
+
                     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
                     const jsonMetrics = JSON.stringify(ask);
+                    const jsonDimensions = JSON.stringify(ask2);
+
 
                     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/load_event
                     xhr.addEventListener("load", (event) => {
@@ -203,15 +252,13 @@
                         const activeUsers = jsMetrics.rows[0].metricValues[0].value;
                         const sessions = jsMetrics.rows[0].metricValues[1].value;
                         const screenPageViews = jsMetrics.rows[0].metricValues[2].value;
-                        const averageSessionDuration = jsMetrics.rows[0].metricValues[3].value;
+                        const averageSessionDuration = Number(jsMetrics.rows[0].metricValues[3].value).toFixed(2);
                         const newUsers = jsMetrics.rows[0].metricValues[4].value;
-                        const screenPageViewsPerSession = jsMetrics.rows[0].metricValues[5].value;
+                        const screenPageViewsPerSession = Number(jsMetrics.rows[0].metricValues[5].value).toFixed(2);
                         const engagedSessions = jsMetrics.rows[0].metricValues[6].value;
-                        const engagementRate = jsMetrics.rows[0].metricValues[7].value;
-                        const bounceRate = jsMetrics.rows[0].metricValues[8].value;
+                        const engagementRate = Number(jsMetrics.rows[0].metricValues[7].value).toFixed(2);
+                        const bounceRate = Number(jsMetrics.rows[0].metricValues[8].value).toFixed(2);
                         const userEngagementDuration = jsMetrics.rows[0].metricValues[9].value;
-
-                        
 
 
                         // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
@@ -226,9 +273,24 @@
                         document.getElementById("bounceRate").textContent = bounceRate;
                         document.getElementById("userEngagementDuration").textContent = userEngagementDuration;
 
-                    });                    
+                    });        
+                    
+
+
+                    xhr2.addEventListener("load", (event) => {
+                        const response2 = xhr2.responseText;
+                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                        const jsDimensions = JSON.parse(response2);
+                        const totalUsers = jsDimensions.rows[0].metricValues[0].value;
+
+                        // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+                        document.getElementById("totalUsers").textContent = totalUsers;
+                    });
+
 
                     xhr.send(jsonMetrics);
+                    xhr2.send(jsonDimensions);
+
                 }
             },
         });
