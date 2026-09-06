@@ -19,6 +19,21 @@
             text-align: center;
             width: 140px;
             height: 140px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .metric_name {
+            font-size: 15px;
+            transform: translateY(-15px);
+        }
+
+        .metric_value {
+            position: absolute;
+            bottom: 16px;
+            transform: translateY(10px);
         }
 
         .cards_row {
@@ -61,6 +76,8 @@
             background-color: aquamarine;
         }
 
+        
+
     </style>
 </head>
 
@@ -84,23 +101,23 @@
 
     
     
-    <!-- __________________________________________________ USERS AND ENGAGEMENT TABS __________________________________________________ -->
+    <!-- ________________________________________________________________ USERS AND ENGAGEMENT TABS ________________________________________________________________ -->
 
     <div id = "users_tab">
         <div class = "cards_row">
             <div class = "metric_card">
-                <h5>Visitors</h5>
-                <p id = "activeUsers"></p>
+                <h5 class = "metric_name">Visitors</h5>
+                <p id = "activeUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Total Users</h5>
-                <p id = "totalUsers"></p>
+                <h5 class = "metric_name">Total Users</h5>
+                <p id = "totalUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>New Visitors</h5>
-                <p id = "newUsers"></p>
+                <h5 class = "metric_name">New Visitors</h5>
+                <p id = "newUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
         </div>
     </div>
@@ -110,43 +127,43 @@
     <div id = "engagement_tab">
         <div class = "cards_row">
             <div class = "metric_card">
-                <h5>Sessions</h5>
-                <p id = "sessions"></p>
+                <h5 class = "metric_name">Sessions</h5>
+                <p id = "sessions" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Page Views</h5>
-                <p id = "screenPageViews"></p>
+                <h5 class = "metric_name">Page Views</h5>
+                <p id = "screenPageViews" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Avg Session Length</h5>
-                <p id = "averageSessionDuration"></p>
+                <h5 class = "metric_name">Avg Session Length</h5>
+                <p id = "averageSessionDuration" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Pages per Session</h5>
-                <p id = "screenPageViewsPerSession"></p>
+                <h5 class = "metric_name">Pages per Session</h5>
+                <p id = "screenPageViewsPerSession" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Engaged Sessions</h5>
-                <p id = "engagedSessions"></p>
+                <h5 class = "metric_name">Engaged Sessions</h5>
+                <p id = "engagedSessions" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Engagement Rate</h5>
-                <p id = "engagementRate"></p>
+                <h5 class = "metric_name">Engagement Rate</h5>
+                <p id = "engagementRate" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Bounce Rate</h5>
-                <p id = "bounceRate"></p>
+                <h5 class = "metric_name">Bounce Rate</h5>
+                <p id = "bounceRate" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
 
             <div class = "metric_card">
-                <h5>Engagement Duration</h5>
-                <p id = "userEngagementDuration"></p>
+                <h5 class = "metric_name">Avg Engagement</h5>
+                <p id = "avgUserEngagement" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
         </div>
     </div>
@@ -154,10 +171,10 @@
 
     
 
-    <!-- __________________________________________________ LOADS GOOGLE'S JS LIBRARY __________________________________________________ -->
+    <!-- ________________________________________________________________ LOADS GOOGLE'S JS LIBRARY ________________________________________________________________ -->
     <script src="https://accounts.google.com/gsi/client"></script>
 
-    <!-- __________________________________________________ LOADS THE CHART.JS LIBRARY __________________________________________________ -->
+    <!-- ________________________________________________________________ LOADS THE CHART.JS LIBRARY ________________________________________________________________ -->
     <!-- https://www.w3schools.com/js/js_graphics_chartjs.asp -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
 
@@ -168,15 +185,17 @@
             scope: 'https://www.googleapis.com/auth/analytics.readonly',
             callback: (tokenResponse) => {
                 if (tokenResponse && tokenResponse.access_token) {
+                    
+                    
                     // https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/runReport
-                    // _____________________________________________ ALLOWS FOR SENDING THE ASK _____________________________________________
+                    // ___________________________________________________________ ALLOWS FOR SENDING THE ASK ___________________________________________________________
                     var xhr = new XMLHttpRequest();
                     xhr.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
                     xhr.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
                     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
                     xhr.setRequestHeader('Content-Type', 'application/json');
                     const ask = {
-                        // Correct naming and allowable metrics: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
+                        // ____________ Correct naming and allowable metrics: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema ____________
                         "metrics": [
                             {
                                 "name": "activeUsers"
@@ -214,8 +233,11 @@
                                 "name": "bounceRate"
                             },
 
+                            // ___________________________________________________ Expression for Calculated Metric ___________________________________________________
+                            // ________________________ https://developers.google.com/analytics/devguides/reporting/data/v1/predefined-reports ________________________
                             {
-                                "name": "userEngagementDuration"
+                                "name": "avgUserEngagement",
+                                "expression": "userEngagementDuration / totalUsers"
                             }
                         ],
 
@@ -227,7 +249,11 @@
                         ]
                     };
 
-                    // _____________________________________________ ALLOWS FOR SENDING THE ASK _____________________________________________
+
+
+                    
+
+                    // ___________________________________________________________ ALLOWS FOR SENDING THE ASK ___________________________________________________________
                     var xhr2 = new XMLHttpRequest();
                     xhr2.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
                     xhr2.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
@@ -244,7 +270,7 @@
                         "dimensions": [
                             {
                                 "name": "browser"
-                            },
+                            }
                         ],
 
                         "dateRanges": [
@@ -255,7 +281,11 @@
                         ]
                     };
 
-                    // _________________________________________ TURNS JS OBJECT INTO JSON OBJECT _________________________________________
+
+
+
+
+                    // _______________________________________________________ TURNS JS OBJECT INTO JSON OBJECT _______________________________________________________
                     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
                     const jsonMetrics = JSON.stringify(ask);
                     const jsonDimensions = JSON.stringify(ask2);
@@ -264,10 +294,10 @@
                     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/load_event
                     xhr.addEventListener("load", (event) => {
                         const response = xhr.responseText;
-                        // _____________________________________ TURNS JSON OBJECT BACK INTO JS OBJECT _____________________________________
+                        // ___________________________________________________ TURNS JSON OBJECT BACK INTO JS OBJECT ___________________________________________________
                         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
                         const jsMetrics = JSON.parse(response);
-                        // _______________________________ ASSIGNS EACH METRIC IN THE RESPONSE TO A CONSTANT _______________________________
+                        // _____________________________________________ ASSIGNS EACH METRIC IN THE RESPONSE TO A CONSTANT _____________________________________________
                         const activeUsers = jsMetrics.rows[0].metricValues[0].value;
                         const sessions = jsMetrics.rows[0].metricValues[1].value;
                         const screenPageViews = jsMetrics.rows[0].metricValues[2].value;
@@ -277,9 +307,10 @@
                         const engagedSessions = jsMetrics.rows[0].metricValues[6].value;
                         const engagementRate = Number(jsMetrics.rows[0].metricValues[7].value).toFixed(2);
                         const bounceRate = Number(jsMetrics.rows[0].metricValues[8].value).toFixed(2);
-                        const userEngagementDuration = jsMetrics.rows[0].metricValues[9].value;
+                        const avgUserEngagement = Number(jsMetrics.rows[0].metricValues[9].value).toFixed(2);
 
-                        // ________________________ PLACES THE RECEIVED VALUES INTO THE CORRESPONDING HTML ELEMENTS ________________________
+
+                        // ______________________________________ PLACES THE RECEIVED VALUES INTO THE CORRESPONDING HTML ELEMENTS ______________________________________
                         // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
                         document.getElementById("activeUsers").textContent = activeUsers;
                         document.getElementById("sessions").textContent = sessions;
@@ -290,7 +321,7 @@
                         document.getElementById("engagedSessions").textContent = engagedSessions;
                         document.getElementById("engagementRate").textContent = engagementRate;
                         document.getElementById("bounceRate").textContent = bounceRate;
-                        document.getElementById("userEngagementDuration").textContent = userEngagementDuration;
+                        document.getElementById("avgUserEngagement").textContent = avgUserEngagement;
 
                     });        
                     
@@ -305,7 +336,9 @@
                         document.getElementById("totalUsers").textContent = totalUsers;
                     });
 
-                    // ________________________________________________ SENDS THE REQUESTS ________________________________________________
+                    
+
+                    // ______________________________________________________________ SENDS THE REQUESTS ______________________________________________________________
                     xhr.send(jsonMetrics);
                     xhr2.send(jsonDimensions);
 
@@ -313,7 +346,7 @@
             },
         });
 
-        // ___________________________________________ FUNCTIONS FOR SHOWING AND HIDING THE TABS ___________________________________________
+        // _________________________________________________________ FUNCTIONS FOR SHOWING AND HIDING THE TABS _________________________________________________________
         function showUsersTab() {
             document.getElementById("users_tab").style.display = "block";
             document.getElementById("engagement_tab").style.display = "none";
@@ -328,7 +361,7 @@
             document.getElementById("engagement_tab_button").style.backgroundColor = "#5b7c56";
         }
 
-        // ___________________________________________________ SHOW USERS TAB BY DEFAULT ___________________________________________________
+        // _________________________________________________________________ SHOW USERS TAB BY DEFAULT _________________________________________________________________
         showUsersTab();
 
         
