@@ -79,7 +79,7 @@
         #browsersChart {
             background-color: rgb(209, 181, 129);
             border-radius: 8px;
-            margin: 30px;
+            margin: 80px;
             padding: 20px;
         }
 
@@ -378,14 +378,22 @@
         // ____________________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ____________________________________________________
         const barColors = ["red", "green","blue","orange","pink"];
 
+        // ___________________________________________________________________ SET DEFAULT LINE COLORS ___________________________________________________________________
+        // ___________________________________________________ https://www.chartjs.org/docs/latest/general/colors.html ___________________________________________________
+        Chart.defaults.backgroundColor = '#000';
+        Chart.defaults.borderColor = '#000';
+        Chart.defaults.color = '#000';
         new Chart("browsersChart", {
             type: "bar",
             data: {
                 labels: ["Chrome", "Safari", "Firefox", "Edge", "Opera"],
-                datasets: [{
+                datasets: [
+                    {
                     backgroundColor: barColors,
+                    color: "red",
                     data: [87, 54, 32, 12, 6],
-                }]
+                    }
+                ]
             },
             // _____________________________________________________________________ DISABLE LEGEND _____________________________________________________________________
             // ________________________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 ________________________________
@@ -394,7 +402,10 @@
                     legend: {
                         display: false
                     }
-                }
+                },
+
+
+                
             }
         });
 
