@@ -76,6 +76,13 @@
             background-color: aquamarine;
         }
 
+        #browsersChart {
+            background-color: rgb(209, 181, 129);
+            border-radius: 8px;
+            margin: 30px;
+            padding: 20px;
+        }
+
         
 
     </style>
@@ -120,6 +127,9 @@
                 <p id = "newUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
         </div>
+
+        <canvas id="browsersChart" style="max-width:300px; max-height: 300px;"></canvas>
+
     </div>
 
 
@@ -251,7 +261,7 @@
 
 
 
-                    
+
 
                     // ___________________________________________________________ ALLOWS FOR SENDING THE ASK ___________________________________________________________
                     var xhr2 = new XMLHttpRequest();
@@ -364,7 +374,31 @@
         // _________________________________________________________________ SHOW USERS TAB BY DEFAULT _________________________________________________________________
         showUsersTab();
 
-        
+        // _____________________________________________________________________ BROWSERS BAR CHART _____________________________________________________________________
+        // ____________________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ____________________________________________________
+        const barColors = ["red", "green","blue","orange","pink"];
+
+        new Chart("browsersChart", {
+            type: "bar",
+            data: {
+                labels: ["Chrome", "Safari", "Firefox", "Edge", "Opera"],
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: [87, 54, 32, 12, 6],
+                }]
+            },
+            // _____________________________________________________________________ DISABLE LEGEND _____________________________________________________________________
+            // ________________________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 ________________________________
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+
     </script>
 
 </body>
