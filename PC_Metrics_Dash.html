@@ -441,7 +441,7 @@
                         document.getElementById("totalUsers").textContent = totalUsers;
 
 
-                        // ____________________________________________________________ BROWSERS BAR CHART ____________________________________________________________
+                        // ____________________________________________________________ BROWSERS PIE CHART ____________________________________________________________
                         // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
                         const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
 
@@ -451,7 +451,7 @@
                         Chart.defaults.borderColor = '#000';
                         Chart.defaults.color = '#000';
                         new Chart("browsersChart", {
-                            type: "bar",
+                            type: "pie",
                             data: {
                                 labels: browsers,
                                 datasets: [
@@ -467,7 +467,14 @@
                             options: {
                                 plugins: {
                                     legend: {
-                                        display: false
+                                        display: true,
+                                        position: "right",
+                                        labels: {
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: 18
+                                        }
                                     }
                                 }, 
                             }
