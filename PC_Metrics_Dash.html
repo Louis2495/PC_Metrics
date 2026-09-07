@@ -97,6 +97,14 @@
             padding: 20px;
         }
 
+        .chartRow1 {
+            display: flex;
+        }
+
+        .chartRow2 {
+            display: flex;
+        }
+
         
 
     </style>
@@ -142,9 +150,15 @@
             </div>
         </div>
 
-        <canvas id="browsersChart" style="max-width:700px; max-height: 300px;"></canvas>
-        <canvas id="countriesChart" style="max-width:700px; max-height: 300px;"></canvas>
-        <canvas id="citiesChart" style="max-width:700px; max-height: 300px;"></canvas>
+
+        <div class = "chartRow1">
+            <canvas id="browsersChart" style="max-width:550px; max-height: 300px;"></canvas>
+            <canvas id="countriesChart" style="max-width:1000px; max-height: 300px;"></canvas>
+        </div>
+        <div class = "chartRow2">
+            <canvas id="citiesChart" style="max-width:1800px; max-height: 500px;"></canvas>
+        </div>
+        
 
     </div>
 
@@ -593,6 +607,22 @@
                                         display: false
                                     }
                                 }, 
+                                // _____________________________________________________ SHORTEN LONG CITY NAMES  _____________________________________________________
+                                // https://stackoverflow.com/questions/51108964/shorten-number-labels-in-charts-js
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            callback: function(value) {
+                                                // https://www.chartjs.org/docs/latest/axes/labelling.html
+                                                const cityName = this.getLabelForValue(value)
+                                                if (cityName.length > 15) {
+                                                    return cityName.substring(0, 15) + "...";
+                                                }
+                                                return cityName;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         });
                     });
