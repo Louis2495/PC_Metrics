@@ -40,36 +40,44 @@
             display: flex;
             gap: 20px;
             justify-content: center;
+            margin-top: 60px;
+            margin-bottom: 80px;
         }
         
         #login_button {
-            width: 140px;
-            height: 40px;
+            width: 210px;
+            height: 60px;
             display: block;
-            margin-top: 80px;
+            margin-top: 240px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 80px;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 24px;
+            font-weight: 550;
         }
 
         #google_logo {
-            width: 30px;
-            height: 30px;
+            width: 38px;
+            height: 38px;
             vertical-align: middle;
+            position: relative;
+            top: -2px;
+            left: -10px;
+            margin-right: -8px;
         }
 
         .tabs {
             display: flex;
             width: 100%;
-            margin-bottom: 30px;
+            margin-top: 90px;
+            margin-bottom: 50px;
         }
 
         .tabs button {
             width: 50%;
-            height: 40px;
+            height: 50px;
+            color: white;
         }
 
         .tabs button.selected {
@@ -80,7 +88,10 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 40px;
+            margin-right: 20px;
+            margin-top: 40px;
+            margin-bottom: 40px;
             padding: 20px;
         }
 
@@ -88,7 +99,10 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 40px;
+            margin-right: 20px;
+            margin-top: 40px;
+            margin-bottom: 20px;
             padding: 20px;
         }
 
@@ -96,7 +110,10 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-top: 20px;
+            margin-bottom: 40px;
             padding: 20px;
         }
 
@@ -104,7 +121,10 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 40px;
+            margin-right: 20px;
+            margin-top: 40px;
+            margin-bottom: 40px;
             padding: 20px;
         }
 
@@ -113,7 +133,10 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 20px;
+            margin-right: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
             padding: 20px;
         }
 
@@ -121,15 +144,32 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: 40px;
+            margin-bottom: 40px;
             padding: 20px;
         }
 
-        #platformsChart {
+        #operatingSystemVersionsChart {
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin: 80px;
+            margin-left: 20px;
+            margin-right: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        #regionsChart {
+            background-color: rgb(55, 61, 66);
+            border-radius: 8px;
+            border: 8px solid rgb(49, 49, 61);
+            margin-left: 20px;
+            margin-right: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
             padding: 20px;
         }
 
@@ -149,7 +189,18 @@
             display: flex;
         }
 
+        #pg1 {
+            display: none
+        }
         
+        #login_title {
+            font-size: 80px;
+        }
+
+        #login_info {
+            font-size: 20px;
+
+        }
 
     </style>
 </head>
@@ -158,64 +209,67 @@
 
 
 <body>
-    <h1>Dashboard</h1>
-    <p>Stats gathered from Google Analytics</p>
+    <h1 id = "login_title">Analytics Dashboard</h1>
+    <p id = "login_info">Stats gathered from Google Analytics</p>
 
     <button id = "login_button" onclick = "client.requestAccessToken();">
         <img id = "google_logo" src = "google_logo.png">
         Log In
     </button>
 
-    <!-- https://www.w3schools.com/jsref/event_onclick.asp -->
-    <div class = "tabs">
-        <button id = "users_tab_button" onclick = "showUsersTab()">Users</button>
-        <button id = "engagement_tab_button" onclick = "showEngagementTab()">Engagement</button>
-    </div>
-
-    
-    
-    <!-- ________________________________________________________________ USERS AND ENGAGEMENT TABS ________________________________________________________________ -->
-
-    <div id = "users_tab">
-        <div class = "cards_row">
-            <div class = "metric_card">
-                <h5 class = "metric_name">Visitors</h5>
-                <p id = "activeUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
-            </div>
-
-            <div class = "metric_card">
-                <h5 class = "metric_name">Total Users</h5>
-                <p id = "totalUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
-            </div>
-
-            <div class = "metric_card">
-                <h5 class = "metric_name">New Visitors</h5>
-                <p id = "newUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
-            </div>
+    <div id = "pg1">
+        <!-- https://www.w3schools.com/jsref/event_onclick.asp -->
+        <div class = "tabs">
+            <button id = "users_tab_button" onclick = "showUsersTab()">Users</button>
+            <button id = "engagement_tab_button" onclick = "showEngagementTab()">Engagement</button>
         </div>
 
-<!-- _________________________________________________________________________ CHART ROWS __________________________________________________________________________ -->
-        <div class = "chartRow1">
-            <canvas id = "browsersChart" style = "max-width:550px; max-height: 300px;"></canvas>
-            <canvas id = "countriesChart" style = "max-width:1000px; max-height: 300px;"></canvas>
-        </div>
-        <div class = "chartRow2">
-            <canvas id = "citiesChart" style = "max-width:1800px; max-height: 500px;"></canvas>
-        </div>
-        <h3>Devices</h3>
-        <div class = "chartRow3">
-            <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
-            <canvas id = "deviceModelsChart" style = "max-width:1000px; max-height: 500px;"></canvas>
-        </div>
-        <h3>User Demographics</h3>
-        <div class = "chartRow4">
-            <canvas id = "operatingSystemsChart" style = "max-width:600px; max-height: 500px;"></canvas>
-            <canvas id = "platformsChart" style = "max-width:1000px; max-height: 500px;"></canvas>
-        </div>
         
+        
+        <!-- ________________________________________________________________ USERS AND ENGAGEMENT TABS ________________________________________________________________ -->
 
+        <div id = "users_tab">
+            <div class = "cards_row">
+                <div class = "metric_card">
+                    <h5 class = "metric_name">Visitors</h5>
+                    <p id = "activeUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
+                </div>
+
+                <div class = "metric_card">
+                    <h5 class = "metric_name">Total Users</h5>
+                    <p id = "totalUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
+                </div>
+
+                <div class = "metric_card">
+                    <h5 class = "metric_name">New Visitors</h5>
+                    <p id = "newUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
+                </div>
+            </div>
+
+    <!-- _________________________________________________________________________ CHART ROWS __________________________________________________________________________ -->
+            <h1>Location</h1>
+            <div class = "chartRow1">
+                <canvas id = "countriesChart" style = "max-width:1000px; max-height: 300px;"></canvas>
+                <canvas id = "regionsChart" style = "max-width:760px; max-height: 300px;"></canvas>
+            </div>
+            <div class = "chartRow2">
+                <canvas id = "citiesChart" style = "max-width:1800px; max-height: 500px;"></canvas>
+            </div>
+            <h1>Device</h1>
+            <div class = "chartRow3">
+                <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
+                <canvas id = "deviceModelsChart" style = "max-width:1160px; max-height: 500px;"></canvas>
+            </div>
+            <h1>System</h1>
+            <div class = "chartRow4">
+                <canvas id = "browsersChart" style = "max-width:550px; max-height: 400px;"></canvas>
+                <canvas id = "operatingSystemsChart" style = "max-width:620px; max-height: 400px;"></canvas>
+                <canvas id = "operatingSystemVersionsChart" style = "max-width:550px; max-height: 400px;"></canvas>
+            </div>
+            
+
+        </div>
     </div>
-
 
 
     <div id = "engagement_tab">
@@ -279,7 +333,10 @@
             scope: 'https://www.googleapis.com/auth/analytics.readonly',
             callback: (tokenResponse) => {
                 if (tokenResponse && tokenResponse.access_token) {
-                    
+
+                    // _______________________________________________________ Hiding parts based on login status _______________________________________________________
+                    document.getElementById("login_button").style.display = "none";
+                    document.getElementById("pg1").style.display = "block";
                     
                     // https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/runReport
                     // __________________________________________________________ ALLOWS FOR SENDING THE ASK 1 __________________________________________________________
@@ -557,7 +614,7 @@
 
                         "dimensions": [
                             {
-                                "name": "platform"
+                                "name": "operatingSystemVersion"
                             }
                         ],
 
@@ -573,6 +630,39 @@
 
 
 
+                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 9 __________________________________________________________
+                    var xhr9 = new XMLHttpRequest();
+                    xhr9.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                    xhr9.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                    xhr9.setRequestHeader('Content-Type', 'application/json');
+
+                    const ask9 = {
+                        "metrics": [
+                            {
+                                "name": "totalUsers"
+                            }
+                        ],
+
+                        "dimensions": [
+                            {
+                                "name": "region"
+                            }
+                        ],
+
+                        "dateRanges": [
+                            {
+                                "startDate": "7daysAgo",
+                                "endDate": "today"
+                            }
+                        ]
+                    };
+
+
+
+
+
+
                     // _______________________________________________________ TURNS JS OBJECT INTO JSON OBJECT _______________________________________________________
                     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
                     const jsonMetrics = JSON.stringify(ask);
@@ -582,7 +672,8 @@
                     const jsonDeviceCategories = JSON.stringify(ask5);
                     const jsonDeviceModels = JSON.stringify(ask6);
                     const jsonOperatingSystems = JSON.stringify(ask7);
-                    const jsonPlatforms = JSON.stringify(ask8);
+                    const jsonOperatingSystemVersions = JSON.stringify(ask8);
+                    const jsonRegions = JSON.stringify(ask9);
 
 
 
@@ -837,7 +928,7 @@
                         
 
 
-                        // ____________________________________________________________ DEVICE CATEGORIES BAR CHART ____________________________________________________________
+                        // ____________________________________________________________ DEVICE CATEGORIES PIE CHART ____________________________________________________________
                         // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
                         const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
 
@@ -955,7 +1046,7 @@
                         
 
 
-                        // ____________________________________________________________ OPERATING SYSTEMS PIE CHART ____________________________________________________________
+                        // ____________________________________________________________ OPERATING SYSTEMS BAR CHART ____________________________________________________________
                         // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
                         const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
 
@@ -1001,17 +1092,17 @@
                         const jsDimensions = JSON.parse(response8);
 
                         // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const platforms = [];
-                        const platformValues = [];
+                        const operatingSystemVersions = [];
+                        const operatingSystemVersionValues = [];
                         // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                         jsDimensions.rows.forEach((row) => {
-                            platforms.push(row.dimensionValues[0].value);
-                            platformValues.push(row.metricValues[0].value);
+                            operatingSystemVersions.push(row.dimensionValues[0].value);
+                            operatingSystemVersionValues.push(row.metricValues[0].value);
                         });
                         
 
 
-                        // ____________________________________________________________ DEVICE MODELS BAR CHART ____________________________________________________________
+                        // ____________________________________________________________ OPERATING SYSTEM VERSIONS CHART ____________________________________________________________
                         // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
                         const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
 
@@ -1020,15 +1111,15 @@
                         Chart.defaults.backgroundColor = '#FFFFFF';
                         Chart.defaults.borderColor = '#FFFFFF';
                         Chart.defaults.color = '#FFFFFF';
-                        new Chart("platformsChart", {
+                        new Chart("operatingSystemVersionsChart", {
                             type: "pie",
                             data: {
-                                labels: platforms,
+                                labels: operatingSystemVersions,
                                 datasets: [
                                     {
                                     backgroundColor: barColors,
                                     color: "red",
-                                    data: platformValues,
+                                    data: operatingSystemVersionValues,
                                     }
                                 ]
                             },
@@ -1037,7 +1128,77 @@
                             options: {
                                 plugins: {
                                     legend: {
-                                        display: false
+                                        display: true,
+                                        position: "right",
+                                        labels: {
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: 18
+                                        }
+                                    }
+                                }, 
+                            }
+                        });
+                    });
+
+
+
+
+
+
+
+                    // ___________________________________________________________ RECEIVING CHART 9 DATA ___________________________________________________________
+                    xhr9.addEventListener("load", (event) => {
+                        const response9 = xhr9.responseText;
+                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                        const jsDimensions = JSON.parse(response9);
+
+                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                        const regions = [];
+                        const regionValues = [];
+                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                        jsDimensions.rows.forEach((row) => {
+                            regions.push(row.dimensionValues[0].value);
+                            regionValues.push(row.metricValues[0].value);
+                        });
+                        
+
+
+                        // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
+                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+
+                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                        Chart.defaults.backgroundColor = '#FFFFFF';
+                        Chart.defaults.borderColor = '#FFFFFF';
+                        Chart.defaults.color = '#FFFFFF';
+                        new Chart("regionsChart", {
+                            type: "pie",
+                            data: {
+                                labels: regions,
+                                datasets: [
+                                    {
+                                    backgroundColor: barColors,
+                                    color: "red",
+                                    data: regionValues,
+                                    }
+                                ]
+                            },
+                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                            options: {
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        position: "right",
+                                        labels: {
+                                            font: {
+                                                size: 14
+                                            },
+                                            padding: 18
+                                        }
                                     }
                                 }, 
                             }
@@ -1062,7 +1223,8 @@
                     xhr5.send(jsonDeviceCategories);
                     xhr6.send(jsonDeviceModels);
                     xhr7.send(jsonOperatingSystems);
-                    xhr8.send(jsonPlatforms);
+                    xhr8.send(jsonOperatingSystemVersions);
+                    xhr9.send(jsonRegions);
 
                 }
             },
