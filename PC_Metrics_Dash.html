@@ -76,23 +76,13 @@
 
         .tabs button {
             width: 50%;
-            height: 50px;
+            height: 60px;
             color: white;
+            font-size: 20px;
         }
 
         .tabs button.selected {
             background-color: aquamarine;
-        }
-
-        #browsersChart {
-            background-color: rgb(55, 61, 66);
-            border-radius: 8px;
-            border: 8px solid rgb(49, 49, 61);
-            margin-left: 40px;
-            margin-right: 20px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-            padding: 20px;
         }
 
         #countriesChart {
@@ -101,7 +91,18 @@
             border: 8px solid rgb(49, 49, 61);
             margin-left: 40px;
             margin-right: 20px;
-            margin-top: 40px;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        #regionsChart {
+            background-color: rgb(55, 61, 66);
+            border-radius: 8px;
+            border: 8px solid rgb(49, 49, 61);
+            margin-left: 20px;
+            margin-right: 40px;
+            margin-top: 0px;
             margin-bottom: 20px;
             padding: 20px;
         }
@@ -123,7 +124,7 @@
             border: 8px solid rgb(49, 49, 61);
             margin-left: 40px;
             margin-right: 20px;
-            margin-top: 40px;
+            margin-top: 0px;
             margin-bottom: 40px;
             padding: 20px;
         }
@@ -135,7 +136,18 @@
             border: 8px solid rgb(49, 49, 61);
             margin-left: 20px;
             margin-right: 40px;
-            margin-top: 40px;
+            margin-top: 0px;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        #browsersChart {
+            background-color: rgb(55, 61, 66);
+            border-radius: 8px;
+            border: 8px solid rgb(49, 49, 61);
+            margin-left: 40px;
+            margin-right: 20px;
+            margin-top: 0px;
             margin-bottom: 40px;
             padding: 20px;
         }
@@ -146,7 +158,7 @@
             border: 8px solid rgb(49, 49, 61);
             margin-left: 20px;
             margin-right: 20px;
-            margin-top: 40px;
+            margin-top: 0px;
             margin-bottom: 40px;
             padding: 20px;
         }
@@ -157,18 +169,7 @@
             border: 8px solid rgb(49, 49, 61);
             margin-left: 20px;
             margin-right: 40px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-            padding: 20px;
-        }
-
-        #regionsChart {
-            background-color: rgb(55, 61, 66);
-            border-radius: 8px;
-            border: 8px solid rgb(49, 49, 61);
-            margin-left: 20px;
-            margin-right: 40px;
-            margin-top: 40px;
+            margin-top: 0px;
             margin-bottom: 40px;
             padding: 20px;
         }
@@ -202,6 +203,16 @@
 
         }
 
+        .section_title {
+            margin-top: 140px;
+            font-size: 45px;
+        }
+
+        #time_interval {
+            width: 160px;
+            height: 40px;
+        }
+
     </style>
 </head>
 
@@ -231,7 +242,7 @@
         <div id = "users_tab">
             <div class = "cards_row">
                 <div class = "metric_card">
-                    <h5 class = "metric_name">Visitors</h5>
+                    <h5 class = "metric_name">Active Users</h5>
                     <p id = "activeUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
                 </div>
 
@@ -241,26 +252,39 @@
                 </div>
 
                 <div class = "metric_card">
-                    <h5 class = "metric_name">New Visitors</h5>
+                    <h5 class = "metric_name">New Users</h5>
                     <p id = "newUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
                 </div>
+
+                <!-- _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________ -->
+                <!-- __________________________________________________ https://www.w3schools.com/tags/tag_select.asp __________________________________________________ -->
+                <!-- _________________________________________________ https://www.w3schools.com/TAgs/att_selected.asp _________________________________________________ -->
+                <label for="time_interval">Select a time interval:</label>
+                <select name="time_interval" id="time_interval">
+                    <option value="1day">1 Day</option>
+                    <option value="1week" selected>1 Week</option>
+                    <option value="1month">1 Month</option>
+                    <option value="6month">6 Months</option>
+                    <option value="1year">1 Year</option>
+                    <option value="alltime">All Time</option>
+                </select>
             </div>
 
     <!-- _________________________________________________________________________ CHART ROWS __________________________________________________________________________ -->
-            <h1>Location</h1>
+            <h1 class = section_title>Location</h1>
             <div class = "chartRow1">
-                <canvas id = "countriesChart" style = "max-width:1000px; max-height: 300px;"></canvas>
-                <canvas id = "regionsChart" style = "max-width:760px; max-height: 300px;"></canvas>
+                <canvas id = "countriesChart" style = "max-width:800px; max-height: 300px;"></canvas>
+                <canvas id = "regionsChart" style = "max-width:960px; max-height: 300px;"></canvas>
             </div>
             <div class = "chartRow2">
                 <canvas id = "citiesChart" style = "max-width:1800px; max-height: 500px;"></canvas>
             </div>
-            <h1>Device</h1>
+            <h1 class = section_title>Device</h1>
             <div class = "chartRow3">
                 <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
                 <canvas id = "deviceModelsChart" style = "max-width:1160px; max-height: 500px;"></canvas>
             </div>
-            <h1>System</h1>
+            <h1 class = section_title>System</h1>
             <div class = "chartRow4">
                 <canvas id = "browsersChart" style = "max-width:550px; max-height: 400px;"></canvas>
                 <canvas id = "operatingSystemsChart" style = "max-width:620px; max-height: 400px;"></canvas>
@@ -328,454 +352,464 @@
 
     <!-- https://developers.google.com/identity/oauth2/web/guides/use-token-model -->
     <script>
+        let time;
+        const time_interval = document.getElementById("time_interval");
         const client = google.accounts.oauth2.initTokenClient({
             client_id: '596258053431-on8jaoq8bv24kuqqdjrqtau1u0ni59fm.apps.googleusercontent.com',
             scope: 'https://www.googleapis.com/auth/analytics.readonly',
             callback: (tokenResponse) => {
                 if (tokenResponse && tokenResponse.access_token) {
 
-                    // _______________________________________________________ Hiding parts based on login status _______________________________________________________
+                    // _______________________________________________________ HIDING PARTS BASED ON LOGIN STATUS _______________________________________________________
                     document.getElementById("login_button").style.display = "none";
                     document.getElementById("pg1").style.display = "block";
-                    
-                    // https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/runReport
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 1 __________________________________________________________
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    const ask = {
-                        // ____________ Correct naming and allowable metrics: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema ____________
-                        "metrics": [
-                            {
-                                "name": "activeUsers"
-                            },
-
-                            {
-                                "name": "sessions"
-                            },
-
-                            {
-                                "name": "screenPageViews"
-                            },
-
-                            {
-                                "name": "averageSessionDuration"
-                            },
-
-                            {
-                                "name": "newUsers"
-                            },
-
-                            {
-                                "name": "screenPageViewsPerSession"
-                            },
-
-                            {
-                                "name": "engagedSessions"
-                            },
-
-                            {
-                                "name": "engagementRate"
-                            },
-
-                            {
-                                "name": "bounceRate"
-                            },
-
-                            // ___________________________________________________ Expression for Calculated Metric ___________________________________________________
-                            // ________________________ https://developers.google.com/analytics/devguides/reporting/data/v1/predefined-reports ________________________
-                            {
-                                "name": "avgUserEngagement",
-                                "expression": "userEngagementDuration / totalUsers"
-                            }
-                        ],
-
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
-
-
-
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 2 __________________________________________________________
-                    var xhr2 = new XMLHttpRequest();
-                    xhr2.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr2.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr2.setRequestHeader('Content-Type', 'application/json');
-
-                    const ask2 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
-
-                        "dimensions": [
-                            {
-                                "name": "browser"
-                            }
-                        ],
-
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
-
-
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 3 __________________________________________________________
-                    var xhr3 = new XMLHttpRequest();
-                    xhr3.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr3.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr3.setRequestHeader('Content-Type', 'application/json');
-
-                    const ask3 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
-
-                        "dimensions": [
-                            {
-                                "name": "country"
-                            }
-                        ],
-
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
 
+                    // _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________
+                    time_interval.addEventListener("change", () => {
+                        change_time_interval();
+                        grab_new_metrics();
+                    });
+
+                    function grab_new_metrics() {
+                        
+                        // https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/runReport
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 1 __________________________________________________________
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                        const ask = {
+                            // ____________ Correct naming and allowable metrics: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema ____________
+                            "metrics": [
+                                {
+                                    "name": "activeUsers"
+                                },
+
+                                {
+                                    "name": "sessions"
+                                },
+
+                                {
+                                    "name": "screenPageViews"
+                                },
+
+                                {
+                                    "name": "averageSessionDuration"
+                                },
+
+                                {
+                                    "name": "newUsers"
+                                },
+
+                                {
+                                    "name": "screenPageViewsPerSession"
+                                },
+
+                                {
+                                    "name": "engagedSessions"
+                                },
+
+                                {
+                                    "name": "engagementRate"
+                                },
+
+                                {
+                                    "name": "bounceRate"
+                                },
+
+                                // ___________________________________________________ Expression for Calculated Metric ___________________________________________________
+                                // ________________________ https://developers.google.com/analytics/devguides/reporting/data/v1/predefined-reports ________________________
+                                {
+                                    "name": "avgUserEngagement",
+                                    "expression": "userEngagementDuration / totalUsers"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
+
+
+
+
+
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 2 __________________________________________________________
+                        var xhr2 = new XMLHttpRequest();
+                        xhr2.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr2.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr2.setRequestHeader('Content-Type', 'application/json');
+
+                        const ask2 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
+
+                            "dimensions": [
+                                {
+                                    "name": "browser"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
 
 
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 4 __________________________________________________________
-                    var xhr4 = new XMLHttpRequest();
-                    xhr4.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr4.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr4.setRequestHeader('Content-Type', 'application/json');
 
-                    const ask4 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
 
-                        "dimensions": [
-                            {
-                                "name": "city"
-                            }
-                        ],
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 3 __________________________________________________________
+                        var xhr3 = new XMLHttpRequest();
+                        xhr3.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr3.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr3.setRequestHeader('Content-Type', 'application/json');
 
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
+                        const ask3 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
 
+                            "dimensions": [
+                                {
+                                    "name": "country"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
 
 
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 5 __________________________________________________________
-                    var xhr5 = new XMLHttpRequest();
-                    xhr5.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr5.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr5.setRequestHeader('Content-Type', 'application/json');
 
-                    const ask5 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
 
-                        "dimensions": [
-                            {
-                                "name": "deviceCategory"
-                            }
-                        ],
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 4 __________________________________________________________
+                        var xhr4 = new XMLHttpRequest();
+                        xhr4.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr4.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr4.setRequestHeader('Content-Type', 'application/json');
 
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
+                        const ask4 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
 
+                            "dimensions": [
+                                {
+                                    "name": "city"
+                                }
+                            ],
 
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
 
 
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 6 __________________________________________________________
-                    var xhr6 = new XMLHttpRequest();
-                    xhr6.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr6.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr6.setRequestHeader('Content-Type', 'application/json');
 
-                    const ask6 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
 
-                        "dimensions": [
-                            {
-                                "name": "mobileDeviceMarketingName"
-                            }
-                        ],
 
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 5 __________________________________________________________
+                        var xhr5 = new XMLHttpRequest();
+                        xhr5.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr5.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr5.setRequestHeader('Content-Type', 'application/json');
 
+                        const ask5 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
 
+                            "dimensions": [
+                                {
+                                    "name": "deviceCategory"
+                                }
+                            ],
 
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
 
 
 
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 7 __________________________________________________________
-                    var xhr7 = new XMLHttpRequest();
-                    xhr7.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr7.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr7.setRequestHeader('Content-Type', 'application/json');
 
-                    const ask7 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
 
-                        "dimensions": [
-                            {
-                                "name": "operatingSystem"
-                            }
-                        ],
 
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
-
-
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 6 __________________________________________________________
+                        var xhr6 = new XMLHttpRequest();
+                        xhr6.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr6.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr6.setRequestHeader('Content-Type', 'application/json');
 
+                        const ask6 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
 
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 8 __________________________________________________________
-                    var xhr8 = new XMLHttpRequest();
-                    xhr8.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr8.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr8.setRequestHeader('Content-Type', 'application/json');
-
-                    const ask8 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
-
-                        "dimensions": [
-                            {
-                                "name": "operatingSystemVersion"
-                            }
-                        ],
-
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
-
-
-
-                    // __________________________________________________________ ALLOWS FOR SENDING THE ASK 9 __________________________________________________________
-                    var xhr9 = new XMLHttpRequest();
-                    xhr9.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                    xhr9.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                    xhr9.setRequestHeader('Content-Type', 'application/json');
-
-                    const ask9 = {
-                        "metrics": [
-                            {
-                                "name": "totalUsers"
-                            }
-                        ],
-
-                        "dimensions": [
-                            {
-                                "name": "region"
-                            }
-                        ],
-
-                        "dateRanges": [
-                            {
-                                "startDate": "7daysAgo",
-                                "endDate": "today"
-                            }
-                        ]
-                    };
-
-
-
-
-
-
-                    // _______________________________________________________ TURNS JS OBJECT INTO JSON OBJECT _______________________________________________________
-                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
-                    const jsonMetrics = JSON.stringify(ask);
-                    const jsonBrowsers = JSON.stringify(ask2);
-                    const jsonCountries = JSON.stringify(ask3);
-                    const jsonCities = JSON.stringify(ask4);
-                    const jsonDeviceCategories = JSON.stringify(ask5);
-                    const jsonDeviceModels = JSON.stringify(ask6);
-                    const jsonOperatingSystems = JSON.stringify(ask7);
-                    const jsonOperatingSystemVersions = JSON.stringify(ask8);
-                    const jsonRegions = JSON.stringify(ask9);
-
-
-
-                    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/load_event
-                    xhr.addEventListener("load", (event) => {
-                        const response = xhr.responseText;
-                        // ___________________________________________________ TURNS JSON OBJECT BACK INTO JS OBJECT ___________________________________________________
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsMetrics = JSON.parse(response);
-                        // _____________________________________________ ASSIGNS EACH METRIC IN THE RESPONSE TO A CONSTANT _____________________________________________
-                        const activeUsers = jsMetrics.rows[0].metricValues[0].value;
-                        const sessions = jsMetrics.rows[0].metricValues[1].value;
-                        const screenPageViews = jsMetrics.rows[0].metricValues[2].value;
-                        const averageSessionDuration = Number(jsMetrics.rows[0].metricValues[3].value).toFixed(2);
-                        const newUsers = jsMetrics.rows[0].metricValues[4].value;
-                        const screenPageViewsPerSession = Number(jsMetrics.rows[0].metricValues[5].value).toFixed(2);
-                        const engagedSessions = jsMetrics.rows[0].metricValues[6].value;
-                        const engagementRate = Number(jsMetrics.rows[0].metricValues[7].value).toFixed(2);
-                        const bounceRate = Number(jsMetrics.rows[0].metricValues[8].value).toFixed(2);
-                        const avgUserEngagement = Number(jsMetrics.rows[0].metricValues[9].value).toFixed(2);
-
-
-                        // ______________________________________ PLACES THE RECEIVED VALUES INTO THE CORRESPONDING HTML ELEMENTS ______________________________________
-                        // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
-                        document.getElementById("activeUsers").textContent = activeUsers;
-                        document.getElementById("sessions").textContent = sessions;
-                        document.getElementById("screenPageViews").textContent = screenPageViews;
-                        document.getElementById("averageSessionDuration").textContent = averageSessionDuration;
-                        document.getElementById("newUsers").textContent = newUsers;
-                        document.getElementById("screenPageViewsPerSession").textContent = screenPageViewsPerSession;
-                        document.getElementById("engagedSessions").textContent = engagedSessions;
-                        document.getElementById("engagementRate").textContent = engagementRate;
-                        document.getElementById("bounceRate").textContent = bounceRate;
-                        document.getElementById("avgUserEngagement").textContent = avgUserEngagement;
-
-                    });        
-                    
-
-
-
-                    // ___________________________________________________________ RECEIVING CHART 2 DATA ___________________________________________________________
-                    xhr2.addEventListener("load", (event) => {
-                        const response2 = xhr2.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response2);
-                        const totalUsers = jsDimensions.rows[0].metricValues[0].value;
-
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const browsers = [];
-                        const browserValues = [];
+                            "dimensions": [
+                                {
+                                    "name": "mobileDeviceMarketingName"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
+
+
+
+
+
+
+
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 7 __________________________________________________________
+                        var xhr7 = new XMLHttpRequest();
+                        xhr7.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr7.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr7.setRequestHeader('Content-Type', 'application/json');
+
+                        const ask7 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
+
+                            "dimensions": [
+                                {
+                                    "name": "operatingSystem"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
+
+
+
+
+
+
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 8 __________________________________________________________
+                        var xhr8 = new XMLHttpRequest();
+                        xhr8.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr8.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr8.setRequestHeader('Content-Type', 'application/json');
+
+                        const ask8 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
+
+                            "dimensions": [
+                                {
+                                    "name": "operatingSystemVersion"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
+
+
+
+
+
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 9 __________________________________________________________
+                        var xhr9 = new XMLHttpRequest();
+                        xhr9.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr9.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr9.setRequestHeader('Content-Type', 'application/json');
+
+                        const ask9 = {
+                            "metrics": [
+                                {
+                                    "name": "totalUsers"
+                                }
+                            ],
+
+                            "dimensions": [
+                                {
+                                    "name": "region"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
+
+
+
+
+
+
+                        // _______________________________________________________ TURNS JS OBJECT INTO JSON OBJECT _______________________________________________________
+                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+                        const jsonMetrics = JSON.stringify(ask);
+                        const jsonBrowsers = JSON.stringify(ask2);
+                        const jsonCountries = JSON.stringify(ask3);
+                        const jsonCities = JSON.stringify(ask4);
+                        const jsonDeviceCategories = JSON.stringify(ask5);
+                        const jsonDeviceModels = JSON.stringify(ask6);
+                        const jsonOperatingSystems = JSON.stringify(ask7);
+                        const jsonOperatingSystemVersions = JSON.stringify(ask8);
+                        const jsonRegions = JSON.stringify(ask9);
+
+
+
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/load_event
+                        xhr.addEventListener("load", (event) => {
+                            const response = xhr.responseText;
+                            // ___________________________________________________ TURNS JSON OBJECT BACK INTO JS OBJECT ___________________________________________________
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsMetrics = JSON.parse(response);
+                            // _____________________________________________ ASSIGNS EACH METRIC IN THE RESPONSE TO A CONSTANT _____________________________________________
+                            const activeUsers = jsMetrics.rows[0].metricValues[0].value;
+                            const sessions = jsMetrics.rows[0].metricValues[1].value;
+                            const screenPageViews = jsMetrics.rows[0].metricValues[2].value;
+                            const averageSessionDuration = Number(jsMetrics.rows[0].metricValues[3].value).toFixed(2);
+                            const newUsers = jsMetrics.rows[0].metricValues[4].value;
+                            const screenPageViewsPerSession = Number(jsMetrics.rows[0].metricValues[5].value).toFixed(2);
+                            const engagedSessions = jsMetrics.rows[0].metricValues[6].value;
+                            const engagementRate = Number(jsMetrics.rows[0].metricValues[7].value).toFixed(2);
+                            const bounceRate = Number(jsMetrics.rows[0].metricValues[8].value).toFixed(2);
+                            const avgUserEngagement = Number(jsMetrics.rows[0].metricValues[9].value).toFixed(2);
+
+
+                            // ______________________________________ PLACES THE RECEIVED VALUES INTO THE CORRESPONDING HTML ELEMENTS ______________________________________
+                            // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+                            document.getElementById("activeUsers").textContent = activeUsers;
+                            document.getElementById("sessions").textContent = sessions;
+                            document.getElementById("screenPageViews").textContent = screenPageViews;
+                            document.getElementById("averageSessionDuration").textContent = averageSessionDuration;
+                            document.getElementById("newUsers").textContent = newUsers;
+                            document.getElementById("screenPageViewsPerSession").textContent = screenPageViewsPerSession;
+                            document.getElementById("engagedSessions").textContent = engagedSessions;
+                            document.getElementById("engagementRate").textContent = engagementRate;
+                            document.getElementById("bounceRate").textContent = bounceRate;
+                            document.getElementById("avgUserEngagement").textContent = avgUserEngagement;
+
+                        });        
                         
 
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            browsers.push(row.dimensionValues[0].value);
-                            browserValues.push(row.metricValues[0].value);
-                        });
-                        
-
-                        // _____________________________________ https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent _____________________________________
-                        document.getElementById("totalUsers").textContent = totalUsers;
 
 
-                        // ____________________________________________________________ BROWSERS PIE CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+                        // ___________________________________________________________ RECEIVING CHART 2 DATA ___________________________________________________________
+                        xhr2.addEventListener("load", (event) => {
+                            const response2 = xhr2.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response2);
+                            const totalUsers = jsDimensions.rows[0].metricValues[0].value;
 
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("browsersChart", {
-                            type: "pie",
-                            data: {
-                                labels: browsers,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: browserValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: true,
-                                        position: "right",
-                                        labels: {
-                                            font: {
-                                                size: 20
-                                            },
-                                            padding: 18
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const browsers = [];
+                            const browserValues = [];
+                            
+
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                browsers.push(row.dimensionValues[0].value);
+                                browserValues.push(row.metricValues[0].value);
+                            });
+                            
+
+                            // _____________________________________ https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent _____________________________________
+                            document.getElementById("totalUsers").textContent = totalUsers;
+
+
+                            // ____________________________________________________________ BROWSERS PIE CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("browsersChart", {
+                                type: "pie",
+                                data: {
+                                    labels: browsers,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: browserValues,
                                         }
-                                    }
-                                }, 
-                            }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: true,
+                                            position: "right",
+                                            labels: {
+                                                font: {
+                                                    size: 20
+                                                },
+                                                padding: 18
+                                            }
+                                        }
+                                    }, 
+                                }
+                            });
                         });
-                    });
 
 
 
@@ -785,55 +819,55 @@
 
 
 
-                    // ___________________________________________________________ RECEIVING CHART 3 DATA ___________________________________________________________
-                    xhr3.addEventListener("load", (event) => {
-                        const response3 = xhr3.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response3);
+                        // ___________________________________________________________ RECEIVING CHART 3 DATA ___________________________________________________________
+                        xhr3.addEventListener("load", (event) => {
+                            const response3 = xhr3.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response3);
 
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const countries = [];
-                        const countryValues = [];
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            countries.push(row.dimensionValues[0].value);
-                            countryValues.push(row.metricValues[0].value);
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const countries = [];
+                            const countryValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                countries.push(row.dimensionValues[0].value);
+                                countryValues.push(row.metricValues[0].value);
+                            });
+                            
+
+
+                            // ____________________________________________________________ COUNTRIES BAR CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("countriesChart", {
+                                type: "bar",
+                                data: {
+                                    labels: countries,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: countryValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }, 
+                                }
+                            });
                         });
-                        
-
-
-                        // ____________________________________________________________ COUNTRIES BAR CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
-
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("countriesChart", {
-                            type: "bar",
-                            data: {
-                                labels: countries,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: countryValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    }
-                                }, 
-                            }
-                        });
-                    });
 
 
 
@@ -841,412 +875,441 @@
 
 
 
-                    // ___________________________________________________________ RECEIVING CHART 4 DATA ___________________________________________________________
-                    xhr4.addEventListener("load", (event) => {
-                        const response4 = xhr4.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response4);
+                        // ___________________________________________________________ RECEIVING CHART 4 DATA ___________________________________________________________
+                        xhr4.addEventListener("load", (event) => {
+                            const response4 = xhr4.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response4);
 
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const cities = [];
-                        const cityValues = [];
-                        
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            cities.push(row.dimensionValues[0].value);
-                            cityValues.push(row.metricValues[0].value);
-                        });
-                        
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const cities = [];
+                            const cityValues = [];
+                            
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                if(row.dimensionValues[0].value != "") {
+                                    cities.push(row.dimensionValues[0].value);
+                                    cityValues.push(row.metricValues[0].value);
+                                }
+                            });
+                            
 
-                        // ____________________________________________________________ CITIES BAR CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+                            // ____________________________________________________________ CITIES BAR CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
 
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("citiesChart", {
-                            type: "bar",
-                            data: {
-                                labels: cities,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: cityValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    }
-                                }, 
-                                // _____________________________________________________ SHORTEN LONG CITY NAMES  _____________________________________________________
-                                // https://stackoverflow.com/questions/51108964/shorten-number-labels-in-charts-js
-                                scales: {
-                                    x: {
-                                        ticks: {
-                                            callback: function(value) {
-                                                // https://www.chartjs.org/docs/latest/axes/labelling.html
-                                                const cityName = this.getLabelForValue(value)
-                                                if (cityName.length > 15) {
-                                                    return cityName.substring(0, 15) + "...";
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("citiesChart", {
+                                type: "bar",
+                                data: {
+                                    labels: cities,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: cityValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }, 
+                                    // _____________________________________________________ SHORTEN LONG CITY NAMES  _____________________________________________________
+                                    // https://stackoverflow.com/questions/51108964/shorten-number-labels-in-charts-js
+                                    scales: {
+                                        x: {
+                                            ticks: {
+                                                callback: function(value) {
+                                                    // https://www.chartjs.org/docs/latest/axes/labelling.html
+                                                    const cityName = this.getLabelForValue(value)
+                                                    if (cityName.length > 15) {
+                                                        return cityName.substring(0, 15) + "...";
+                                                    }
+                                                    return cityName;
                                                 }
-                                                return cityName;
                                             }
                                         }
                                     }
                                 }
-                            }
+                            });
                         });
-                    });
 
 
 
 
 
-                    // ___________________________________________________________ RECEIVING CHART 5 DATA ___________________________________________________________
-                    xhr5.addEventListener("load", (event) => {
-                        const response5 = xhr5.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response5);
+                        // ___________________________________________________________ RECEIVING CHART 5 DATA ___________________________________________________________
+                        xhr5.addEventListener("load", (event) => {
+                            const response5 = xhr5.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response5);
 
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const deviceCategories = [];
-                        const deviceCategoryValues = [];
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            deviceCategories.push(row.dimensionValues[0].value);
-                            deviceCategoryValues.push(row.metricValues[0].value);
-                        });
-                        
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const deviceCategories = [];
+                            const deviceCategoryValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                deviceCategories.push(row.dimensionValues[0].value);
+                                deviceCategoryValues.push(row.metricValues[0].value);
+                            });
+                            
 
 
-                        // ____________________________________________________________ DEVICE CATEGORIES PIE CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+                            // ____________________________________________________________ DEVICE CATEGORIES PIE CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
 
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("deviceCategoriesChart", {
-                            type: "pie",
-                            data: {
-                                labels: deviceCategories,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: deviceCategoryValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: true,
-                                        position: "right",
-                                        labels: {
-                                            font: {
-                                                size: 20
-                                            },
-                                            padding: 18
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("deviceCategoriesChart", {
+                                type: "pie",
+                                data: {
+                                    labels: deviceCategories,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: deviceCategoryValues,
                                         }
-                                    }
-                                }, 
-                            }
-                        });
-                    });
-
-
-
-
-
-
-                    // ___________________________________________________________ RECEIVING CHART 6 DATA ___________________________________________________________
-                    xhr6.addEventListener("load", (event) => {
-                        const response6 = xhr6.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response6);
-
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const deviceModels = [];
-                        const deviceModelValues = [];
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            deviceModels.push(row.dimensionValues[0].value);
-                            deviceModelValues.push(row.metricValues[0].value);
-                        });
-                        
-
-
-                        // ____________________________________________________________ DEVICE MODELS BAR CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
-
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("deviceModelsChart", {
-                            type: "bar",
-                            data: {
-                                labels: deviceModels,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: deviceModelValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    }
-                                }, 
-                            }
-                        });
-                    });
-
-
-
-
-
-
-                    // ___________________________________________________________ RECEIVING CHART 7 DATA ___________________________________________________________
-                    xhr7.addEventListener("load", (event) => {
-                        const response7 = xhr7.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response7);
-                        console.log(jsDimensions);
-
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const operatingSystems = [];
-                        const operatingSystemsValues = [];
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            operatingSystems.push(row.dimensionValues[0].value);
-                            operatingSystemsValues.push(row.metricValues[0].value);
-                        });
-                        
-
-
-                        // ____________________________________________________________ OPERATING SYSTEMS BAR CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
-
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("operatingSystemsChart", {
-                            type: "bar",
-                            data: {
-                                labels: operatingSystems,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: operatingSystemsValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    }
-                                }, 
-                            }
-                        });
-                    });
-
-
-
-
-
-
-
-                    // ___________________________________________________________ RECEIVING CHART 8 DATA ___________________________________________________________
-                    xhr8.addEventListener("load", (event) => {
-                        const response8 = xhr8.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response8);
-
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const operatingSystemVersions = [];
-                        const operatingSystemVersionValues = [];
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            operatingSystemVersions.push(row.dimensionValues[0].value);
-                            operatingSystemVersionValues.push(row.metricValues[0].value);
-                        });
-                        
-
-
-                        // ____________________________________________________________ OPERATING SYSTEM VERSIONS CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
-
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("operatingSystemVersionsChart", {
-                            type: "pie",
-                            data: {
-                                labels: operatingSystemVersions,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: operatingSystemVersionValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: true,
-                                        position: "right",
-                                        labels: {
-                                            font: {
-                                                size: 20
-                                            },
-                                            padding: 18
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: true,
+                                            position: "right",
+                                            labels: {
+                                                font: {
+                                                    size: 20
+                                                },
+                                                padding: 18
+                                            }
                                         }
-                                    }
-                                }, 
-                            }
+                                    }, 
+                                }
+                            });
                         });
-                    });
 
 
 
 
 
 
+                        // ___________________________________________________________ RECEIVING CHART 6 DATA ___________________________________________________________
+                        xhr6.addEventListener("load", (event) => {
+                            const response6 = xhr6.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response6);
 
-                    // ___________________________________________________________ RECEIVING CHART 9 DATA ___________________________________________________________
-                    xhr9.addEventListener("load", (event) => {
-                        const response9 = xhr9.responseText;
-                        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                        const jsDimensions = JSON.parse(response9);
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const deviceModels = [];
+                            const deviceModelValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
+                                    deviceModels.push(row.dimensionValues[0].value);
+                                    deviceModelValues.push(row.metricValues[0].value);
+                                }
+                            });
+                            
 
-                        // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                        const regions = [];
-                        const regionValues = [];
-                        // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                        jsDimensions.rows.forEach((row) => {
-                            regions.push(row.dimensionValues[0].value);
-                            regionValues.push(row.metricValues[0].value);
+
+                            // ____________________________________________________________ DEVICE MODELS BAR CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("deviceModelsChart", {
+                                type: "bar",
+                                data: {
+                                    labels: deviceModels,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: deviceModelValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }, 
+                                }
+                            });
                         });
+
+
+
+
+
+
+                        // ___________________________________________________________ RECEIVING CHART 7 DATA ___________________________________________________________
+                        xhr7.addEventListener("load", (event) => {
+                            const response7 = xhr7.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response7);
+                            console.log(jsDimensions);
+
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const operatingSystems = [];
+                            const operatingSystemsValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                operatingSystems.push(row.dimensionValues[0].value);
+                                operatingSystemsValues.push(row.metricValues[0].value);
+                            });
+                            
+
+
+                            // ____________________________________________________________ OPERATING SYSTEMS BAR CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("operatingSystemsChart", {
+                                type: "bar",
+                                data: {
+                                    labels: operatingSystems,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: operatingSystemsValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }, 
+                                }
+                            });
+                        });
+
+
+
+
+
+
+
+                        // ___________________________________________________________ RECEIVING CHART 8 DATA ___________________________________________________________
+                        xhr8.addEventListener("load", (event) => {
+                            const response8 = xhr8.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response8);
+
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const operatingSystemVersions = [];
+                            const operatingSystemVersionValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
+                                    operatingSystemVersions.push(row.dimensionValues[0].value);
+                                    operatingSystemVersionValues.push(row.metricValues[0].value);
+                                }
+                            });
+                            
+
+
+                            // ____________________________________________________________ OPERATING SYSTEM VERSIONS CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("operatingSystemVersionsChart", {
+                                type: "pie",
+                                data: {
+                                    labels: operatingSystemVersions,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: operatingSystemVersionValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: true,
+                                            position: "right",
+                                            labels: {
+                                                font: {
+                                                    size: 20
+                                                },
+                                                padding: 18
+                                            }
+                                        }
+                                    }, 
+                                }
+                            });
+                        });
+
+
+
+
+
+
+
+                        // ___________________________________________________________ RECEIVING CHART 9 DATA ___________________________________________________________
+                        xhr9.addEventListener("load", (event) => {
+                            const response9 = xhr9.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response9);
+
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const regions = [];
+                            const regionValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
+                                    regions.push(row.dimensionValues[0].value);
+                                    regionValues.push(row.metricValues[0].value);
+                                }
+                            });
+                            
+
+
+                            // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("regionsChart", {
+                                type: "pie",
+                                data: {
+                                    labels: regions,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: regionValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: true,
+                                            position: "right",
+                                            labels: {
+                                                font: {
+                                                    size: 14
+                                                },
+                                                padding: 18
+                                            }
+                                        }
+                                    }, 
+                                }
+                            });
+                        });
+
+
+
+
                         
 
+                        // ______________________________________________________________ SENDS THE REQUESTS ______________________________________________________________
+                        xhr.send(jsonMetrics);
+                        xhr2.send(jsonBrowsers);
+                        xhr3.send(jsonCountries);
+                        xhr4.send(jsonCities);
+                        xhr5.send(jsonDeviceCategories);
+                        xhr6.send(jsonDeviceModels);
+                        xhr7.send(jsonOperatingSystems);
+                        xhr8.send(jsonOperatingSystemVersions);
+                        xhr9.send(jsonRegions);
+                    }
 
-                        // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
-                        // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                        const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
-
-                        // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                        // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                        Chart.defaults.backgroundColor = '#FFFFFF';
-                        Chart.defaults.borderColor = '#FFFFFF';
-                        Chart.defaults.color = '#FFFFFF';
-                        new Chart("regionsChart", {
-                            type: "pie",
-                            data: {
-                                labels: regions,
-                                datasets: [
-                                    {
-                                    backgroundColor: barColors,
-                                    color: "red",
-                                    data: regionValues,
-                                    }
-                                ]
-                            },
-                            // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                            // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                            options: {
-                                plugins: {
-                                    legend: {
-                                        display: true,
-                                        position: "right",
-                                        labels: {
-                                            font: {
-                                                size: 14
-                                            },
-                                            padding: 18
-                                        }
-                                    }
-                                }, 
-                            }
-                        });
-                    });
-
-
-
-
-                    
-
-
-
-
-                    
-
-                    // ______________________________________________________________ SENDS THE REQUESTS ______________________________________________________________
-                    xhr.send(jsonMetrics);
-                    xhr2.send(jsonBrowsers);
-                    xhr3.send(jsonCountries);
-                    xhr4.send(jsonCities);
-                    xhr5.send(jsonDeviceCategories);
-                    xhr6.send(jsonDeviceModels);
-                    xhr7.send(jsonOperatingSystems);
-                    xhr8.send(jsonOperatingSystemVersions);
-                    xhr9.send(jsonRegions);
-
+                    change_time_interval();
+                    grab_new_metrics();
                 }
             },
         });
+    
 
         // _________________________________________________________ FUNCTIONS FOR SHOWING AND HIDING THE TABS _________________________________________________________
         function showUsersTab() {
             document.getElementById("users_tab").style.display = "block";
             document.getElementById("engagement_tab").style.display = "none";
-            document.getElementById("users_tab_button").style.backgroundColor = "#5b7c56";
-            document.getElementById("engagement_tab_button").style.backgroundColor = "#6e6e6e";
+            document.getElementById("users_tab_button").style.backgroundColor = "rgb(22, 15, 57)";
+            document.getElementById("engagement_tab_button").style.backgroundColor = "rgb(70, 70, 70)";
         }
 
         function showEngagementTab() {
             document.getElementById("users_tab").style.display = "none";
             document.getElementById("engagement_tab").style.display = "block";
-            document.getElementById("users_tab_button").style.backgroundColor = "#6e6e6e";
-            document.getElementById("engagement_tab_button").style.backgroundColor = "#5b7c56";
+            document.getElementById("users_tab_button").style.backgroundColor = "rgb(70, 70, 70)";
+            document.getElementById("engagement_tab_button").style.backgroundColor = "rgb(22, 15, 57)";
         }
 
         // _________________________________________________________________ SHOW USERS TAB BY DEFAULT _________________________________________________________________
         showUsersTab();
+        changeTimeInterval();
+
+        function change_time_interval() {
+            if (time_interval.value == "1day") {
+                time = "1daysAgo";
+            }
+            else if (time_interval.value == "1week") {
+                time = "7daysAgo";
+            }
+            else if (time_interval.value == "1month") {
+                time = "30daysAgo";
+            }
+            else if (time_interval.value == "6month") {
+                time = "180daysAgo";
+            }
+            else if (time_interval.value == "1year") {
+                time = "365daysAgo";
+            }
+            else if (time_interval.value == "alltime") {
+                time = "1980-01-01";
+            }
+        }
 
         
 
@@ -1256,8 +1319,3 @@
 </body>
 </html>
 
-
-
-
-
-<!-- Possible Dimension Adds: Date, DateHour, Hour, Language -->
