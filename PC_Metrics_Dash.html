@@ -209,8 +209,16 @@
         }
 
         #time_interval {
-            width: 160px;
-            height: 40px;
+            width: 200px;
+            height: 60px;
+            border: 8px solid rgb(49, 49, 61);
+            border-radius: 8px;
+            text-align: center;
+            position: absolute;
+            right: 60px;
+            background-color: rgb(70, 70, 70);
+            color: white;
+            font-size: 18px;
         }
 
     </style>
@@ -259,7 +267,6 @@
                 <!-- _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________ -->
                 <!-- __________________________________________________ https://www.w3schools.com/tags/tag_select.asp __________________________________________________ -->
                 <!-- _________________________________________________ https://www.w3schools.com/TAgs/att_selected.asp _________________________________________________ -->
-                <label for="time_interval">Select a time interval:</label>
                 <select name="time_interval" id="time_interval">
                     <option value="1day">1 Day</option>
                     <option value="1week" selected>1 Week</option>
@@ -367,6 +374,7 @@
                     // _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________
                     time_interval.addEventListener("change", () => {
                         change_time_interval();
+                        delete_old_charts();
                         grab_new_metrics();
                     });
 
@@ -1275,21 +1283,26 @@
         function showUsersTab() {
             document.getElementById("users_tab").style.display = "block";
             document.getElementById("engagement_tab").style.display = "none";
-            document.getElementById("users_tab_button").style.backgroundColor = "rgb(22, 15, 57)";
+            document.getElementById("users_tab_button").style.borderColor = "rgb(5, 19, 7)";
+            document.getElementById("engagement_tab_button").style.borderColor = "rgb(70, 70, 70)";
+            document.getElementById("users_tab_button").style.backgroundColor = "rgb(70, 70, 70)";
             document.getElementById("engagement_tab_button").style.backgroundColor = "rgb(70, 70, 70)";
         }
 
         function showEngagementTab() {
             document.getElementById("users_tab").style.display = "none";
             document.getElementById("engagement_tab").style.display = "block";
+            document.getElementById("users_tab_button").style.borderColor = "rgb(70, 70, 70)";
+            document.getElementById("engagement_tab_button").style.borderColor = "rgb(5, 19, 7)";
             document.getElementById("users_tab_button").style.backgroundColor = "rgb(70, 70, 70)";
-            document.getElementById("engagement_tab_button").style.backgroundColor = "rgb(22, 15, 57)";
+            document.getElementById("engagement_tab_button").style.backgroundColor = "rgb(70, 70, 70)";
         }
 
         // _________________________________________________________________ SHOW USERS TAB BY DEFAULT _________________________________________________________________
         showUsersTab();
-        changeTimeInterval();
+        change_time_interval();
 
+        // ___________________________________________________________ ALLOWS FOR CHANGING THE TIME INTERVAL ___________________________________________________________
         function change_time_interval() {
             if (time_interval.value == "1day") {
                 time = "1daysAgo";
@@ -1309,6 +1322,14 @@
             else if (time_interval.value == "alltime") {
                 time = "1980-01-01";
             }
+        }
+
+        // ___________________________________________________ DELETING CHARTS OUTDATED AFTER TIME SWITCH ___________________________________________________
+        function delete_old_charts() {
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values
+            Object.values(Chart.instances).forEach((chart) => {
+                chart.destroy();
+            });
         }
 
         
