@@ -174,6 +174,28 @@
             padding: 20px;
         }
 
+        #usersSessionsChart {
+            background-color: rgb(55, 61, 66);
+            border-radius: 8px;
+            border: 8px solid rgb(49, 49, 61);
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        #screenPageViewsChart {
+            background-color: rgb(55, 61, 66);
+            border-radius: 8px;
+            border: 8px solid rgb(49, 49, 61);
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
         .chartRow1 {
             display: flex;
         }
@@ -187,6 +209,14 @@
         }
 
         .chartRow4 {
+            display: flex;
+        }
+
+        .chartRow01 {
+            display: flex;
+        }
+
+        .chartRow02 {
             display: flex;
         }
 
@@ -344,7 +374,28 @@
                 <h5 class = "metric_name">Avg Engagement</h5>
                 <p id = "avgUserEngagement" class = "metric_value" style = "font-size: 40px; color: red;"></p>
             </div>
+
+            <!--
+            <select name="time_interval" id="time_interval">
+                <option value="1day">1 Day</option>
+                <option value="1week" selected>1 Week</option>
+                <option value="1month">1 Month</option>
+                <option value="6month">6 Months</option>
+                <option value="1year">1 Year</option>
+                <option value="alltime">All Time</option>
+            </select>
+            -->
         </div>
+
+        <h1 class = section_title>Traffic Analysis</h1>
+            <div class = "chartRow01">
+                <canvas id = "usersSessionsChart" style = "max-width:1800px; max-height: 400px;"></canvas>
+            </div>
+
+        <h1 class = section_title>Page Traffic</h1>
+            <div class = "chartRow02">
+                <canvas id = "screenPageViewsChart" style = "max-width:1800px; max-height: 400px;"></canvas>
+            </div>
     </div>
 
 
@@ -433,6 +484,7 @@
                                     "expression": "userEngagementDuration / totalUsers"
                                 }
                             ],
+
 
                             "dateRanges": [
                                 {
@@ -704,6 +756,86 @@
 
 
 
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 10 __________________________________________________________
+                        var xhr10 = new XMLHttpRequest();
+                        xhr10.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr10.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr10.setRequestHeader('Content-Type', 'application/json');
+
+                        const ask10 = {
+                            "metrics": [
+                                {
+                                    "name": "activeUsers"
+                                },
+                                {
+                                    "name": "sessions"
+                                }
+                            ],
+
+                            "dimensions": [
+                                {
+                                    "name": "date"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ],
+                            // ________________________________ ORDER THE DATES SO THEY DON'T APPEAR IN THE ORDER THEY WERE RECEIVED ________________________________
+                            // _____________________________ https://developers.google.com/analytics/devguides/reporting/data/v1/pivots _____________________________
+                            "orderBys": [
+                                {
+                                    "dimension": {
+                                        "dimensionName": "date"
+                                        },
+                                        "desc": false
+                                }
+                            ]
+                        };
+
+
+
+
+
+
+
+                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 10 __________________________________________________________
+                        var xhr11 = new XMLHttpRequest();
+                        xhr11.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
+                        xhr11.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
+                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+                        xhr11.setRequestHeader('Content-Type', 'application/json');
+
+                        const ask11 = {
+                            "metrics": [
+                                {
+                                    "name": "screenPageViews"
+                                }
+                            ],
+
+                            "dimensions": [
+                                {
+                                    "name": "pagePath"
+                                }
+                            ],
+
+                            "dateRanges": [
+                                {
+                                    "startDate": time,
+                                    "endDate": "today"
+                                }
+                            ]
+                        };
+
+
+
+
+
+
 
                         // _______________________________________________________ TURNS JS OBJECT INTO JSON OBJECT _______________________________________________________
                         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
@@ -716,6 +848,8 @@
                         const jsonOperatingSystems = JSON.stringify(ask7);
                         const jsonOperatingSystemVersions = JSON.stringify(ask8);
                         const jsonRegions = JSON.stringify(ask9);
+                        const jsonUsersSessions = JSON.stringify(ask10);
+                        const jsonScreenPageViews = JSON.stringify(ask11);
 
 
 
@@ -751,8 +885,14 @@
                             document.getElementById("bounceRate").textContent = bounceRate;
                             document.getElementById("avgUserEngagement").textContent = avgUserEngagement;
 
-                        });        
+                        });
                         
+                        
+
+
+
+
+
 
 
 
@@ -804,6 +944,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Browsers",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: true,
                                             position: "right",
@@ -869,6 +1019,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Countries",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: false
                                         }
@@ -895,7 +1055,7 @@
                             
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
-                                if(row.dimensionValues[0].value != "") {
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     cities.push(row.dimensionValues[0].value);
                                     cityValues.push(row.metricValues[0].value);
                                 }
@@ -927,6 +1087,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Cities",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: false
                                         }
@@ -997,6 +1167,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Device Categories",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: true,
                                             position: "right",
@@ -1061,6 +1241,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Device Models",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: false
                                         }
@@ -1079,15 +1269,16 @@
                             const response7 = xhr7.responseText;
                             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
                             const jsDimensions = JSON.parse(response7);
-                            console.log(jsDimensions);
 
                             // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
                             const operatingSystems = [];
                             const operatingSystemsValues = [];
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
-                                operatingSystems.push(row.dimensionValues[0].value);
-                                operatingSystemsValues.push(row.metricValues[0].value);
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
+                                    operatingSystems.push(row.dimensionValues[0].value);
+                                    operatingSystemsValues.push(row.metricValues[0].value);
+                                }
                             });
                             
 
@@ -1117,6 +1308,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Operating Systems",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: false
                                         }
@@ -1175,6 +1376,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Operating System Versions",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: true,
                                             position: "right",
@@ -1240,6 +1451,16 @@
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
                                     plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Regions",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
                                         legend: {
                                             display: true,
                                             position: "right",
@@ -1251,6 +1472,153 @@
                                             }
                                         }
                                     }, 
+                                }
+                            });
+                        });
+
+
+
+
+
+                        // ___________________________________________________________ RECEIVING CHART 10 DATA ___________________________________________________________
+                        xhr10.addEventListener("load", (event) => {
+                            const response10 = xhr10.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response10);
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const usersValues = [];
+                            const dates = [];
+                            const sessionsValues = [];
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
+                                    usersValues.push(row.metricValues[0].value);
+                                    sessionsValues.push(row.metricValues[1].value);
+                                    dates.push(row.dimensionValues[0].value);
+                                    
+                                }
+                            });
+                            
+
+                            // ____________________________________________________________ USERS & SESSIONS LINE CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+
+                            new Chart("usersSessionsChart", {
+                                type: "line",
+                                data: {
+                                    labels: dates,
+                                        datasets: [
+                                        {
+                                        label: "Users",
+                                        data: usersValues,
+                                        borderColor: "red",
+                                        },
+                                        {
+                                        label: "Sessions",
+                                        data: sessionsValues,
+                                        borderColor: "blue",
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Users and Sessions Over Time",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
+                                        legend: {
+                                            display: true,
+                                            position: "right",
+                                            labels: {
+                                                font: {
+                                                    size: 14
+                                                },
+                                                padding: 18
+                                            }
+                                        }
+                                    }, 
+                                }
+                            });
+                        });
+
+
+
+                        // ___________________________________________________________ RECEIVING CHART 11 DATA ___________________________________________________________
+                        xhr11.addEventListener("load", (event) => {
+                            const response11 = xhr11.responseText;
+                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                            const jsDimensions = JSON.parse(response11);
+
+                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
+                            const screenPages = [];
+                            const screenPageViewValues = [];
+                            
+                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
+                            jsDimensions.rows.forEach((row) => {
+                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
+                                    screenPages.push(row.dimensionValues[0].value);
+                                    screenPageViewValues.push(row.metricValues[0].value);
+                                }
+                            });
+                            
+
+                            // ____________________________________________________________ CITIES BAR CHART ____________________________________________________________
+                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
+                            const barColors = ["red", "green","blue","orange","pink", "yellow", "purple", "aquamarine"];
+
+                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
+                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
+                            Chart.defaults.backgroundColor = '#FFFFFF';
+                            Chart.defaults.borderColor = '#FFFFFF';
+                            Chart.defaults.color = '#FFFFFF';
+                            new Chart("screenPageViewsChart", {
+                                type: "bar",
+                                data: {
+                                    labels: screenPages,
+                                    datasets: [
+                                        {
+                                        backgroundColor: barColors,
+                                        color: "red",
+                                        data: screenPageViewValues,
+                                        }
+                                    ]
+                                },
+                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
+                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
+                                options: {
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: "Pages",
+                                            font: {
+                                                size: 20
+                                            },
+                                            padding: {
+                                                bottom: 30
+                                            }
+                                        },
+                                        legend: {
+                                            display: false
+                                        }
+                                    }
+                                    // _____________________________________________________ SHORTEN LONG CITY NAMES  _____________________________________________________
+                                    // https://stackoverflow.com/questions/51108964/shorten-number-labels-in-charts-js
+                                    
                                 }
                             });
                         });
@@ -1270,6 +1638,8 @@
                         xhr7.send(jsonOperatingSystems);
                         xhr8.send(jsonOperatingSystemVersions);
                         xhr9.send(jsonRegions);
+                        xhr10.send(jsonUsersSessions);
+                        xhr11.send(jsonScreenPageViews);
                     }
 
                     change_time_interval();
@@ -1320,7 +1690,7 @@
                 time = "365daysAgo";
             }
             else if (time_interval.value == "alltime") {
-                time = "1980-01-01";
+                time = "2000-01-01";
             }
         }
 
