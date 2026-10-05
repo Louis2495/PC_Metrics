@@ -284,10 +284,12 @@
                     <p id = "activeUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
                 </div>
 
+                <!--
                 <div class = "metric_card">
                     <h5 class = "metric_name">Total Users</h5>
                     <p id = "totalUsers" class = "metric_value" style = "font-size: 40px; color: red;"></p>
                 </div>
+                -->
 
                 <div class = "metric_card">
                     <h5 class = "metric_name">New Users</h5>
@@ -394,7 +396,7 @@
 
         <h1 class = section_title>Page Traffic</h1>
             <div class = "chartRow02">
-                <canvas id = "screenPageViewsChart" style = "max-width:1800px; max-height: 400px;"></canvas>
+                <canvas id = "screenPageViewsChart" style = "max-width:1800px; max-height: 800px;"></canvas>
             </div>
     </div>
 
@@ -1601,6 +1603,7 @@
                                 // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
                                 // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
                                 options: {
+                                    indexAxis: 'y',
                                     plugins: {
                                         title: {
                                             display: true,
