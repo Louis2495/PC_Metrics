@@ -1255,8 +1255,17 @@
                                         },
                                         legend: {
                                             display: false
-                                        }
+                                        },
                                     }, 
+                                    // _________________ https://www.chartjs.org/docs/latest/axes/cartesian/linear.html#linear-axis-specific-tick-options _________________ 
+                                    scales: {
+                                        y: {
+                                            ticks: {
+                                                precision: 0,
+                                                stepSize: 1
+                                            },
+                                        }
+                                    }
                                 }
                             });
                         });
