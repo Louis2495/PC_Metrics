@@ -918,7 +918,7 @@
                             
 
                             // _____________________________________ https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent _____________________________________
-                            document.getElementById("totalUsers").textContent = totalUsers;
+                            // document.getElementById("totalUsers").textContent = totalUsers;
 
 
                             // ____________________________________________________________ BROWSERS PIE CHART ____________________________________________________________
@@ -1496,7 +1496,7 @@
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     usersValues.push(row.metricValues[0].value);
                                     sessionsValues.push(row.metricValues[1].value);
-                                    dates.push(row.dimensionValues[0].value);
+                                    dates.push(row.dimensionValues[0].value.substring(4,6) + "/" + row.dimensionValues[0].value.substring(6,8) + "/" + row.dimensionValues[0].value.substring(0,4));
                                     
                                 }
                             });
