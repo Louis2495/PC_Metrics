@@ -85,6 +85,12 @@
             background-color: aquamarine;
         }
 
+        #stats_info_button {
+            width: 220px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
         #countriesChart {
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
@@ -145,7 +151,7 @@
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
             border: 8px solid rgb(49, 49, 61);
-            margin-left: 40px;
+            margin-left: 20px;
             margin-right: 20px;
             margin-top: 0px;
             margin-bottom: 40px;
@@ -308,6 +314,10 @@
                     <option value="alltime">All Time</option>
                 </select>
             </div>
+            <!-- _______________________ https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page _______________________ -->
+            <div>
+                <button id = "stats_info_button" onclick = "location.href = 'Stats_Info.html'">Stats Information (i)</button>
+            </div>
 
     <!-- _________________________________________________________________________ CHART ROWS __________________________________________________________________________ -->
             <h1 class = section_title>Location</h1>
@@ -325,9 +335,8 @@
             </div>
             <h1 class = section_title>System</h1>
             <div class = "chartRow4">
-                <canvas id = "browsersChart" style = "max-width:550px; max-height: 400px;"></canvas>
-                <canvas id = "operatingSystemsChart" style = "max-width:620px; max-height: 400px;"></canvas>
-                <canvas id = "operatingSystemVersionsChart" style = "max-width:550px; max-height: 400px;"></canvas>
+                <canvas id = "operatingSystemsChart" style = "max-width:1210px; max-height: 460px;"></canvas>
+                <canvas id = "browsersChart" style = "max-width:570px; max-height: 460px;"></canvas>
             </div>
             
 
@@ -678,37 +687,7 @@
                             "dimensions": [
                                 {
                                     "name": "operatingSystem"
-                                }
-                            ],
-
-                            "dateRanges": [
-                                {
-                                    "startDate": time,
-                                    "endDate": "today"
-                                }
-                            ]
-                        };
-
-
-
-
-
-
-                        // __________________________________________________________ ALLOWS FOR SENDING THE ASK 8 __________________________________________________________
-                        var xhr8 = new XMLHttpRequest();
-                        xhr8.open('POST', 'https://analyticsdata.googleapis.com/v1beta/properties/530374749:runReport');
-                        xhr8.setRequestHeader('Authorization', 'Bearer ' + tokenResponse.access_token);
-                        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
-                        xhr8.setRequestHeader('Content-Type', 'application/json');
-
-                        const ask8 = {
-                            "metrics": [
-                                {
-                                    "name": "totalUsers"
-                                }
-                            ],
-
-                            "dimensions": [
+                                },
                                 {
                                     "name": "operatingSystemVersion"
                                 }
@@ -721,6 +700,7 @@
                                 }
                             ]
                         };
+
 
 
 
@@ -848,7 +828,6 @@
                         const jsonDeviceCategories = JSON.stringify(ask5);
                         const jsonDeviceModels = JSON.stringify(ask6);
                         const jsonOperatingSystems = JSON.stringify(ask7);
-                        const jsonOperatingSystemVersions = JSON.stringify(ask8);
                         const jsonRegions = JSON.stringify(ask9);
                         const jsonUsersSessions = JSON.stringify(ask10);
                         const jsonScreenPageViews = JSON.stringify(ask11);
@@ -1286,9 +1265,9 @@
                             const operatingSystemsValues = [];
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
-                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
-                                    operatingSystems.push(row.dimensionValues[0].value);
-                                    operatingSystemsValues.push(row.metricValues[0].value);
+                                if((row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") && (row.dimensionValues[1].value != "" && row.dimensionValues[1].value != "(not set)")) {
+                                    operatingSystems.push(row.dimensionValues[0].value + " " + row.dimensionValues[1].value);
+                                    operatingSystemsValues.push(Number(row.metricValues[0].value));
                                 }
                             });
                             
@@ -1343,74 +1322,7 @@
 
 
 
-                        // ___________________________________________________________ RECEIVING CHART 8 DATA ___________________________________________________________
-                        xhr8.addEventListener("load", (event) => {
-                            const response8 = xhr8.responseText;
-                            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                            const jsDimensions = JSON.parse(response8);
-
-                            // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
-                            const operatingSystemVersions = [];
-                            const operatingSystemVersionValues = [];
-                            // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
-                            jsDimensions.rows.forEach((row) => {
-                                if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
-                                    operatingSystemVersions.push(row.dimensionValues[0].value);
-                                    operatingSystemVersionValues.push(row.metricValues[0].value);
-                                }
-                            });
-                            
-
-
-                            // ____________________________________________________________ OPERATING SYSTEM VERSIONS CHART ____________________________________________________________
-                            // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
-
-                            // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
-                            // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
-                            Chart.defaults.backgroundColor = '#FFFFFF';
-                            Chart.defaults.borderColor = '#FFFFFF';
-                            Chart.defaults.color = '#FFFFFF';
-                            new Chart("operatingSystemVersionsChart", {
-                                type: "pie",
-                                data: {
-                                    labels: operatingSystemVersions,
-                                    datasets: [
-                                        {
-                                        backgroundColor: barColors,
-                                        color: "red",
-                                        data: operatingSystemVersionValues,
-                                        }
-                                    ]
-                                },
-                                // ____________________________________________________________ DISABLE LEGEND ____________________________________________________________
-                                // _______________________ https://stackoverflow.com/questions/36749509/removing-legend-on-charts-with-chart-js-v2 _______________________
-                                options: {
-                                    plugins: {
-                                        title: {
-                                            display: true,
-                                            text: "Operating System Versions",
-                                            font: {
-                                                size: 20
-                                            },
-                                            padding: {
-                                                bottom: 30
-                                            }
-                                        },
-                                        legend: {
-                                            display: true,
-                                            position: "right",
-                                            labels: {
-                                                font: {
-                                                    size: 20
-                                                },
-                                                padding: 18
-                                            }
-                                        }
-                                    }, 
-                                }
-                            });
-                        });
+                        
 
 
 
@@ -1648,7 +1560,6 @@
                         xhr5.send(jsonDeviceCategories);
                         xhr6.send(jsonDeviceModels);
                         xhr7.send(jsonOperatingSystems);
-                        xhr8.send(jsonOperatingSystemVersions);
                         xhr9.send(jsonRegions);
                         xhr10.send(jsonUsersSessions);
                         xhr11.send(jsonScreenPageViews);
