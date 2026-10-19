@@ -12,19 +12,37 @@
         }
 
         #stats_info_table {
-            width: 600px;
+            width: 1000px;
             height: 800px;
             border-width: 4px;
             border-style: solid;
             border-color: white;
             border-radius: 8px;
-            border-collapse: collapse;
-            
+            border-spacing: 0;
+            border-collapse: separate;
+            margin: 40px auto;
         }
 
         table th,
         table td {
-            border: solid 4px;
+            border: 4px solid white;
+        }
+
+        #stats_info_table thead {
+            background-color: rgb(19, 67, 131);
+        }
+
+        #stats_info_table thead th {
+            padding: 20px;
+        }
+
+        #stats_info_table tbody {
+            background-color: rgb(7, 66, 46);
+        }
+
+        #return_to_dash {
+            width: 170px;
+            height: 35px;
         }
         
     </style>
@@ -34,70 +52,70 @@
     <!-- ___________________________________________ https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table ___________________________________________ -->
     <!-- __________________________________________________ https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Table __________________________________________________ -->
 
+    <button id = "return_to_dash" onclick = "location.href = 'PC_Metrics_Dash.html'">
+        Return to Dashboard
+    </button>
+
     <table id = "stats_info_table">
-        <caption>
-            Front-end web developer course 2021
-        </caption>
         <thead>
             <tr>
                 <th scope="col">Metric</th>
                 <th scope="col">Explanation</th>
+                <th scope="col">Measured in</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row">Active Users</th>
-                <td>HTML tables</td>
-                <td>22</td>
+                <td>Number of unique users that had an engaged session</td>
+                <td># of Users</td>
             </tr>
             <tr>
                 <th scope="row">New Users</th>
-                <td>Web accessibility</td>
-                <td>45</td>
+                <td>Number of unique new users</td>
+                <td># of Users</td>
             </tr>
             <tr>
                 <th scope="row">Sessions</th>
-                <td>JavaScript frameworks</td>
-                <td>29</td>
+                <td>Total number of visits to the site (not necessarily unique)</td>
+                <td># of Sessions</td>
             </tr>
             <tr>
                 <th scope="row">Avg Session Length</th>
-                <td>Web performance</td>
-                <td>36</td>
+                <td>Average session length across all (active and inactive) users</td>
+                <td>Seconds</td>
             </tr>
             <tr>
                 <th scope="row">Pages per Session</th>
-                <td>JavaScript frameworks</td>
-                <td>29</td>
+                <td>Average number of pages accessed per session (not necessarily unique)</td>
+                <td># of Pages</td>
             </tr>
             <tr>
                 <th scope="row">Engaged Sessions</th>
-                <td>JavaScript frameworks</td>
-                <td>29</td>
+                <td># of visits longer than 10 seconds, had at least 2 page views, or involved a key event</td>
+                <td># of Sessions</td>
             </tr>
             <tr>
                 <th scope="row">Engagement Rate</th>
-                <td>JavaScript frameworks</td>
-                <td>29</td>
+                <td>The fraction of visits that were engaged sessions (Engaged Sessions / Total Sessions)</td>
+                <td>Decimal</td>
             </tr>
             <tr>
                 <th scope="row">Bounce Rate</th>
-                <td>JavaScript frameworks</td>
-                <td>29</td>
+                <td>The fraction of visits that were not engaged sessions (Non-engaged Sessions / Total Sessions)</td>
+                <td>Decimal</td>
             </tr>
             <tr>
                 <th scope="row">Avg Engagement</th>
-                <td>JavaScript frameworks</td>
-                <td>29</td>
+                <td>The average time the website was actively in use (Engagement Duration / Active Users)</td>
+                <td>Seconds</td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <th scope="row" colspan="2">AAAAA</th>
-                <td>BBBBB</td>
-            </tr>
-        </tfoot>
+        
     </table>
+
+    
+
 
 
 
