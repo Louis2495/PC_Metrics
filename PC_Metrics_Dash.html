@@ -91,6 +91,13 @@
             border-radius: 8px;
         }
 
+        #info_icon {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
         #countriesChart {
             background-color: rgb(55, 61, 66);
             border-radius: 8px;
@@ -303,10 +310,24 @@
                 </div>
 
 
+                <div class = "metric_card">
+                    <h5 class = "metric_name">Countries Reached</h5>
+                    <p id = "countriesReached" class = "metric_value" style = "font-size: 40px; color: red;"></p>
+                </div>
 
 
+                <div class = "metric_card">
+                    <h5 class = "metric_name">Regions Reached</h5>
+                    <p id = "regionsReached" class = "metric_value" style = "font-size: 40px; color: red;"></p>
+                </div>
 
-                
+
+                <div class = "metric_card">
+                    <h5 class = "metric_name">Cities Reached</h5>
+                    <p id = "citiesReached" class = "metric_value" style = "font-size: 40px; color: red;"></p>
+                </div>
+
+
 
                 <!-- _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________ -->
                 <!-- __________________________________________________ https://www.w3schools.com/tags/tag_select.asp __________________________________________________ -->
@@ -322,7 +343,10 @@
             </div>
             <!-- _______________________ https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page _______________________ -->
             <div>
-                <button id = "stats_info_button" onclick = "location.href = 'Stats_Info.html'">Stats Information (i)</button>
+                <button id = "stats_info_button" onclick = "location.href = 'Stats_Info.html'">
+                    <img id = "info_icon" src = "info_icon.png">
+                    Stats Information
+                </button>
             </div>
 
     <!-- _________________________________________________________________________ CHART ROWS __________________________________________________________________________ -->
@@ -402,6 +426,10 @@
                 <option value="alltime">All Time</option>
             </select>
             -->
+        </div>
+
+        <div>
+            <button id = "stats_info_button" onclick = "location.href = 'Stats_Info.html'">Stats Information (i)</button>
         </div>
 
         <h1 class = section_title>Traffic Analysis</h1>
@@ -871,6 +899,7 @@
                             document.getElementById("engagementRate").textContent = engagementRate;
                             document.getElementById("bounceRate").textContent = bounceRate;
                             document.getElementById("avgUserEngagement").textContent = avgUserEngagement;
+                            document.getElementById("countriesReached")
 
                         });
                         
@@ -1318,6 +1347,15 @@
                                             display: false
                                         }
                                     }, 
+                                    scales: {
+                                        x: {
+                                            ticks: {
+                                                autoskip: false,
+                                                minRotation: 90
+                                            }
+                                        }
+                                    } 
+                                    
                                 }
                             });
                         });
