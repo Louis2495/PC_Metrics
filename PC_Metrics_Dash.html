@@ -474,7 +474,7 @@
                 <div class = "chartRow1">
                     <div id = "countries_chart_wrapper" style = "width:1640px; height: 860px;">
                         <canvas id = "countriesChart"></canvas>
-                        <div>notset: ?</div>
+                        <div id = "Countries_NotSet"></div>
                     </div>
                 </div>
 
@@ -482,7 +482,7 @@
                     <div id="regions_chart_wrapper" style = "width:1640px; height:760px;">
                         <div style="width:1640px; height:700px;">
                             <canvas id="regionsChart"></canvas>
-                            <div>notset: ?</div>
+                            <div id = "Regions_NotSet"></div>
                         </div>
                     </div>
                 </div>
@@ -490,7 +490,7 @@
                 <div class = "chartRow2">
                     <div id="cities_chart_wrapper" style = "width:1640px; min-height:700px;">
                         <canvas id = "citiesChart" style = "width:1640px; max-height: 600px;"></canvas>
-                        <div>notset: ?</div>
+                        <div id = "Cities_NotSet"></div>
                     </div>
                 </div>
             </div>
@@ -500,7 +500,9 @@
             <div id = "device_wrapper">
                 <div class = "chartRow3">
                     <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
+                    <div id="Device_Categories_NotSet"></div>
                     <canvas id = "deviceModelsChart" style = "max-width:1160px; max-height: 500px;"></canvas>
+                    <div id="Device_Models_NotSet"></div>
                 </div>
             </div>
 
@@ -508,7 +510,9 @@
             <div id = "system_wrapper">
                 <div class = "chartRow4">
                     <canvas id = "operatingSystemsChart" style = "max-width:1210px; max-height: 460px;"></canvas>
+                    <div id="Operating_Systems_NotSet"></div>
                     <canvas id = "browsersChart" style = "max-width:570px; max-height: 460px;"></canvas>
+                    <div id="Browsers_NotSet"></div>
                 </div>
             </div>
             
@@ -1049,6 +1053,7 @@
                             document.getElementById("bounceRate").textContent = bounceRate;
                             document.getElementById("avgUserEngagement").textContent = avgUserEngagement;
                             document.getElementById("countriesReached")
+                            
 
                         });
                         
@@ -1072,12 +1077,18 @@
                             const browsers = [];
                             const browserValues = [];
                             
-
+                            let Browsers_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 browsers.push(row.dimensionValues[0].value);
                                 browserValues.push(row.metricValues[0].value);
+
+                                if (row.dimensionValues[0].value == "(not set)" || row.dimensionValues[0].value == "") {
+                                    Browsers_NotSet_count += 1;
+                                }
                             });
+
+                            document.getElementById("Browsers_NotSet").textContent = Browsers_NotSet_count;
                             
 
                             // _____________________________________ https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent _____________________________________
@@ -1152,12 +1163,21 @@
                             // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
                             const countries = [];
                             const countryValues = [];
+
+                            let Countries_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 countries.push(row.dimensionValues[0].value);
                                 countryValues.push(row.metricValues[0].value);
+
+                                if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
+                                    Countries_NotSet_count += 1;
+                                }
                             });
-                            
+
+                            document.getElementById("Countries_NotSet").textContent = Countries_NotSet_count;
+                            document.getElementById("countriesReached").textContent = countries.length;
+
 
 
                             // ____________________________________________________________ COUNTRIES BAR CHART ____________________________________________________________
@@ -1219,12 +1239,20 @@
                             const cities = [];
                             const cityValues = [];
                             
+                            let Cities_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     cities.push(row.dimensionValues[0].value);
                                     cityValues.push(row.metricValues[0].value);
                                 }
+
+                                if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
+                                    Cities_NotSet_count += 1;
+                                }
+
+                                document.getElementById("Cities_NotSet").textContent = Cities_NotSet_count;
+                                document.getElementById("citiesReached").textContent = cities.length;
                             });
                             
 
@@ -1300,12 +1328,19 @@
                             // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
                             const deviceCategories = [];
                             const deviceCategoryValues = [];
+
+                            let Device_Categories_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 deviceCategories.push(row.dimensionValues[0].value);
                                 deviceCategoryValues.push(row.metricValues[0].value);
+
+                                if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
+                                    Device_Categories_NotSet_count += 1;
+                                }
                             });
                             
+                            document.getElementById("Device_Categories_NotSet").textContent = Device_Categories_NotSet_count;
 
 
                             // ____________________________________________________________ DEVICE CATEGORIES PIE CHART ____________________________________________________________
@@ -1373,14 +1408,21 @@
                             // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
                             const deviceModels = [];
                             const deviceModelValues = [];
+
+                            let Device_Models_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     deviceModels.push(row.dimensionValues[0].value);
                                     deviceModelValues.push(row.metricValues[0].value);
                                 }
+
+                                if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
+                                    Device_Models_NotSet_count += 1;
+                                }
                             });
                             
+                            document.getElementById("Device_Models_NotSet").textContent = Device_Models_NotSet_count;
 
 
                             // ____________________________________________________________ DEVICE MODELS BAR CHART ____________________________________________________________
@@ -1449,15 +1491,21 @@
                             // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
                             const operatingSystems = [];
                             const operatingSystemsValues = [];
+
+                            let Operating_Systems_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if((row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") && (row.dimensionValues[1].value != "" && row.dimensionValues[1].value != "(not set)")) {
                                     operatingSystems.push(row.dimensionValues[0].value + " " + row.dimensionValues[1].value);
                                     operatingSystemsValues.push(Number(row.metricValues[0].value));
                                 }
+
+                                if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
+                                    Operating_Systems_NotSet_count += 1;
+                                }
                             });
                             
-
+                            document.getElementById("Operating_Systems_NotSet").textContent = Operating_Systems_NotSet_count;
 
                             // ____________________________________________________________ OPERATING SYSTEMS BAR CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
@@ -1534,15 +1582,22 @@
                             // ________________________________________________ CREATE ARRAYS TO STORE THE DIMENSION DATA ________________________________________________
                             const regions = [];
                             const regionValues = [];
+
+                            let Regions_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     regions.push(row.dimensionValues[0].value);
                                     regionValues.push(row.metricValues[0].value);
                                 }
+
+                                if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
+                                    Regions_NotSet_count += 1;
+                                }
                             });
                             
-
+                            document.getElementById("Regions_NotSet").textContent = Regions_NotSet_count;
+                            document.getElementById("regionsReached").textContent = regions.length;
 
                             // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
@@ -1610,6 +1665,8 @@
                             const usersValues = [];
                             const dates = [];
                             const sessionsValues = [];
+
+                            let Sessions_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
@@ -1689,6 +1746,7 @@
                             const screenPages = [];
                             const screenPageViewValues = [];
                             
+                            let screenPages_NotSet_count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
@@ -1696,6 +1754,7 @@
                                     screenPageViewValues.push(row.metricValues[0].value);
                                 }
                             });
+
                             
 
                             // ____________________________________________________________ CITIES BAR CHART ____________________________________________________________
