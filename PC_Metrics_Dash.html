@@ -500,9 +500,9 @@
             <div id = "device_wrapper">
                 <div class = "chartRow3">
                     <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
-                    <div id="Device_Categories_NotSet"></div>
+                    <div id="DeviceCategories_NotSet"></div>
                     <canvas id = "deviceModelsChart" style = "max-width:1160px; max-height: 500px;"></canvas>
-                    <div id="Device_Models_NotSet"></div>
+                    <div id="DeviceModels_NotSet"></div>
                 </div>
             </div>
 
@@ -510,7 +510,7 @@
             <div id = "system_wrapper">
                 <div class = "chartRow4">
                     <canvas id = "operatingSystemsChart" style = "max-width:1210px; max-height: 460px;"></canvas>
-                    <div id="Operating_Systems_NotSet"></div>
+                    <div id="OperatingSystems_NotSet"></div>
                     <canvas id = "browsersChart" style = "max-width:570px; max-height: 460px;"></canvas>
                     <div id="Browsers_NotSet"></div>
                 </div>
@@ -1078,17 +1078,20 @@
                             const browserValues = [];
                             
                             let Browsers_NotSet_count = 0;
+                            let Browsers_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 browsers.push(row.dimensionValues[0].value);
                                 browserValues.push(row.metricValues[0].value);
+                                Browsers_Count += Number(row.metricValues[0].value);
 
                                 if (row.dimensionValues[0].value == "(not set)" || row.dimensionValues[0].value == "") {
-                                    Browsers_NotSet_count += 1;
+                                    Browsers_NotSet_count += Number(row.metricValues[0].value);
                                 }
                             });
 
-                            document.getElementById("Browsers_NotSet").textContent = Browsers_NotSet_count;
+                            const Browsers_NotSet_percent = (Browsers_NotSet_count / Browsers_Count) * 100;
+                            document.getElementById("Browsers_NotSet").textContent = Browsers_NotSet_percent + "%";
                             
 
                             // _____________________________________ https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent _____________________________________
@@ -1165,17 +1168,20 @@
                             const countryValues = [];
 
                             let Countries_NotSet_count = 0;
+                            let Countries_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 countries.push(row.dimensionValues[0].value);
                                 countryValues.push(row.metricValues[0].value);
+                                Countries_Count += Number(row.metricValues[0].value);
 
                                 if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
-                                    Countries_NotSet_count += 1;
+                                    Countries_NotSet_count += Number(row.metricValues[0].value);
                                 }
                             });
 
-                            document.getElementById("Countries_NotSet").textContent = Countries_NotSet_count;
+                            const Countries_NotSet_percent = (Countries_NotSet_count / Countries_Count) * 100;
+                            document.getElementById("Countries_NotSet").textContent = "Not Set: " + Countries_NotSet_percent + "%";
                             document.getElementById("countriesReached").textContent = countries.length;
 
 
@@ -1240,18 +1246,21 @@
                             const cityValues = [];
                             
                             let Cities_NotSet_count = 0;
+                            let Cities_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     cities.push(row.dimensionValues[0].value);
                                     cityValues.push(row.metricValues[0].value);
                                 }
+                                Cities_Count += Number(row.metricValues[0].value);
 
                                 if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
-                                    Cities_NotSet_count += 1;
+                                    Cities_NotSet_count += Number(row.metricValues[0].value);
                                 }
 
-                                document.getElementById("Cities_NotSet").textContent = Cities_NotSet_count;
+                                const Cities_NotSet_percent = (Cities_NotSet_count / Cities_Count) * 100;
+                                document.getElementById("Cities_NotSet").textContent = "Not Set: " + Cities_NotSet_percent + "%";
                                 document.getElementById("citiesReached").textContent = cities.length;
                             });
                             
@@ -1329,18 +1338,21 @@
                             const deviceCategories = [];
                             const deviceCategoryValues = [];
 
-                            let Device_Categories_NotSet_count = 0;
+                            let DeviceCategories_NotSet_count = 0;
+                            let DeviceCategories_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 deviceCategories.push(row.dimensionValues[0].value);
                                 deviceCategoryValues.push(row.metricValues[0].value);
+                                DeviceCategories_Count += Number(row.metricValues[0].value);
 
                                 if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
-                                    Device_Categories_NotSet_count += 1;
+                                    DeviceCategories_NotSet_count += Number(row.metricValues[0].value);
                                 }
                             });
                             
-                            document.getElementById("Device_Categories_NotSet").textContent = Device_Categories_NotSet_count;
+                            const DeviceCategories_NotSet_percent = (DeviceCategories_NotSet_count / DeviceCategories_Count) * 100;
+                            document.getElementById("DeviceCategories_NotSet").textContent = "Not Set: " + DeviceCategories_NotSet_percent + "%";
 
 
                             // ____________________________________________________________ DEVICE CATEGORIES PIE CHART ____________________________________________________________
@@ -1409,20 +1421,23 @@
                             const deviceModels = [];
                             const deviceModelValues = [];
 
-                            let Device_Models_NotSet_count = 0;
+                            let DeviceModels_NotSet_count = 0;
+                            let DeviceModels_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     deviceModels.push(row.dimensionValues[0].value);
                                     deviceModelValues.push(row.metricValues[0].value);
                                 }
+                                DeviceModels_Count += Number(row.metricValues[0].value);
 
                                 if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
-                                    Device_Models_NotSet_count += 1;
+                                    DeviceModels_NotSet_count += Number(row.metricValues[0].value);
                                 }
                             });
                             
-                            document.getElementById("Device_Models_NotSet").textContent = Device_Models_NotSet_count;
+                            const DeviceModels_NotSet_percent = (DeviceModels_NotSet_count / DeviceModels_Count) * 100;
+                            document.getElementById("DeviceModels_NotSet").textContent = "Not Set: " + DeviceModels_NotSet_percent + "%";
 
 
                             // ____________________________________________________________ DEVICE MODELS BAR CHART ____________________________________________________________
@@ -1492,20 +1507,23 @@
                             const operatingSystems = [];
                             const operatingSystemsValues = [];
 
-                            let Operating_Systems_NotSet_count = 0;
+                            let OperatingSystems_NotSet_count = 0;
+                            let OperatingSystems_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if((row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") && (row.dimensionValues[1].value != "" && row.dimensionValues[1].value != "(not set)")) {
                                     operatingSystems.push(row.dimensionValues[0].value + " " + row.dimensionValues[1].value);
                                     operatingSystemsValues.push(Number(row.metricValues[0].value));
                                 }
+                                OperatingSystems_Count += Number(row.metricValues[0].value);
 
                                 if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
-                                    Operating_Systems_NotSet_count += 1;
+                                    OperatingSystems_NotSet_count += Number(row.metricValues[0].value);
                                 }
                             });
                             
-                            document.getElementById("Operating_Systems_NotSet").textContent = Operating_Systems_NotSet_count;
+                            const OperatingSystems_NotSet_percent = (OperatingSystems_NotSet_count / OperatingSystems_Count) * 100;
+                            document.getElementById("OperatingSystems_NotSet").textContent = "Not Set: " + OperatingSystems_NotSet_percent + "%";
 
                             // ____________________________________________________________ OPERATING SYSTEMS BAR CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
@@ -1584,19 +1602,22 @@
                             const regionValues = [];
 
                             let Regions_NotSet_count = 0;
+                            let Regions_Count = 0;
                             // ______________________________________________ https://www.w3schools.com/jsref/jsref_push.asp ______________________________________________
                             jsDimensions.rows.forEach((row) => {
                                 if(row.dimensionValues[0].value != "" && row.dimensionValues[0].value != "(not set)") {
                                     regions.push(row.dimensionValues[0].value);
                                     regionValues.push(row.metricValues[0].value);
                                 }
+                                Regions_Count += Number(row.metricValues[0].value);
 
                                 if((row.dimensionValues[0].value == "(not set)") || (row.dimensionValues[0].value == "")) {
-                                    Regions_NotSet_count += 1;
+                                    Regions_NotSet_count += Number(row.metricValues[0].value);
                                 }
                             });
                             
-                            document.getElementById("Regions_NotSet").textContent = Regions_NotSet_count;
+                            const Regions_NotSet_percent = (Regions_NotSet_count / Regions_Count) * 100;
+                            document.getElementById("Regions_NotSet").textContent = "Not Set: " + Regions_NotSet_percent + "%";
                             document.getElementById("regionsReached").textContent = regions.length;
 
                             // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
