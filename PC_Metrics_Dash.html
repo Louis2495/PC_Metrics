@@ -371,13 +371,14 @@
         }
 
         #time_interval {
-            width: 200px;
+            width: 180px;
             height: 60px;
             border: 8px solid rgb(49, 49, 61);
             border-radius: 8px;
             text-align: center;
             position: absolute;
-            right: 60px;
+            top: 40px;
+            right: 40px;
             background-color: rgb(70, 70, 70);
             color: white;
             font-size: 18px;
@@ -404,6 +405,19 @@
             <button id = "users_tab_button" onclick = "showUsersTab()">Users</button>
             <button id = "engagement_tab_button" onclick = "showEngagementTab()">Engagement</button>
         </div>
+
+
+        <!-- _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________ -->
+        <!-- __________________________________________________ https://www.w3schools.com/tags/tag_select.asp __________________________________________________ -->
+        <!-- _________________________________________________ https://www.w3schools.com/TAgs/att_selected.asp _________________________________________________ -->
+        <select name="time_interval" id="time_interval">
+            <option value="1day">1 Day</option>
+            <option value="1week" selected>1 Week</option>
+            <option value="1month">1 Month</option>
+            <option value="6month">6 Months</option>
+            <option value="1year">1 Year</option>
+            <option value="alltime">All Time</option>
+        </select>
 
         
         
@@ -445,20 +459,6 @@
                     <h5 class = "metric_name">Cities Reached</h5>
                     <p id = "citiesReached" class = "metric_value" style = "font-size: 40px; color: red;"></p>
                 </div>
-
-
-
-                <!-- _____________________________________________________________ TIME INTERVAL DROPDOWN _____________________________________________________________ -->
-                <!-- __________________________________________________ https://www.w3schools.com/tags/tag_select.asp __________________________________________________ -->
-                <!-- _________________________________________________ https://www.w3schools.com/TAgs/att_selected.asp _________________________________________________ -->
-                <select name="time_interval" id="time_interval">
-                    <option value="1day">1 Day</option>
-                    <option value="1week" selected>1 Week</option>
-                    <option value="1month">1 Month</option>
-                    <option value="6month">6 Months</option>
-                    <option value="1year">1 Year</option>
-                    <option value="alltime">All Time</option>
-                </select>
             </div>
             <!-- _______________________ https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page _______________________ -->
             <div>
@@ -1182,7 +1182,7 @@
 
                             // ____________________________________________________________ COUNTRIES BAR CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)", "rgb(217, 216, 165)", "rgb(140, 111, 102)", "rgb(191, 127, 14)", "rgb(101, 173, 17)", "rgb(146, 196, 183)", "rgb(200, 152, 214)", "rgb(60, 91, 181)", "rgb(190, 159, 222)", "rgb(158, 22, 94)"];
 
                             // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
                             // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
@@ -1601,7 +1601,7 @@
 
                             // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)", "rgb(217, 216, 165)", "rgb(140, 111, 102)", "rgb(191, 127, 14)", "rgb(101, 173, 17)", "rgb(146, 196, 183)", "rgb(200, 152, 214)", "rgb(60, 91, 181)", "rgb(190, 159, 222)", "rgb(158, 22, 94)"];
 
                             // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
                             // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
@@ -1680,7 +1680,7 @@
 
                             // ____________________________________________________________ USERS & SESSIONS LINE CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
-                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)"];
+                            const barColors = ["red", "green", "blue", "orange", "pink", "yellow", "purple", "aquamarine", "rgb(139, 69, 19)", "rgb(0, 191, 255)", "rgb(255, 105, 180)", "rgb(50, 205, 50)", "rgb(255, 140, 0)", "rgb(148, 0, 211)", "rgb(0, 128, 128)", "rgb(220, 20, 60)", "rgb(65, 105, 225)", "rgb(255, 215, 0)", "rgb(0, 100, 0)", "rgb(255, 20, 147)", "rgb(30, 144, 255)", "rgb(255, 127, 80)", "rgb(128, 0, 128)", "rgb(217, 216, 165)", "rgb(140, 111, 102)", "rgb(191, 127, 14)", "rgb(101, 173, 17)", "rgb(146, 196, 183)", "rgb(200, 152, 214)", "rgb(60, 91, 181)", "rgb(190, 159, 222)", "rgb(158, 22, 94)"];
 
                             // __________________________________________________________ SET DEFAULT LINE COLORS __________________________________________________________
                             // __________________________________________ https://www.chartjs.org/docs/latest/general/colors.html __________________________________________
