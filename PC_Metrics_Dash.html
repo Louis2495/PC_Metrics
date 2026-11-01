@@ -342,6 +342,7 @@
 
         .chartRow4 {
             display: flex;
+            width: 100%;
         }
 
         .chartRow01 {
@@ -383,6 +384,35 @@
             color: white;
             font-size: 18px;
         }
+
+        .deviceCategories_box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 35%;
+        }
+
+        .deviceModels_box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 65%;
+        }
+
+        .os_box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70%;
+        }
+
+        .browsers_box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+
 
     </style>
 </head>
@@ -497,22 +527,30 @@
 
 
             <h1 class = section_title>Device</h1>
-            <div id = "device_wrapper">
+            <div id = "device_wrapper" style = "height: 580px;">
                 <div class = "chartRow3">
-                    <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
-                    <div id="DeviceCategories_NotSet"></div>
-                    <canvas id = "deviceModelsChart" style = "max-width:1160px; max-height: 500px;"></canvas>
-                    <div id="DeviceModels_NotSet"></div>
+                    <div class = deviceCategories_box>
+                        <canvas id = "deviceCategoriesChart" style = "max-width:600px; max-height: 500px;"></canvas>
+                        <div id="DeviceCategories_NotSet"></div>
+                    </div>
+                    <div class = "deviceModels_box">
+                        <canvas id = "deviceModelsChart" style = "max-width:1160px; max-height: 500px;"></canvas>
+                        <div id="DeviceModels_NotSet"></div>
+                    </div>
                 </div>
             </div>
 
             <h1 class = section_title>System</h1>
-            <div id = "system_wrapper">
+            <div id = "system_wrapper" style = "height: 540px;">
                 <div class = "chartRow4">
-                    <canvas id = "operatingSystemsChart" style = "max-width:1210px; max-height: 460px;"></canvas>
-                    <div id="OperatingSystems_NotSet"></div>
-                    <canvas id = "browsersChart" style = "max-width:570px; max-height: 460px;"></canvas>
-                    <div id="Browsers_NotSet"></div>
+                    <div class = "os_box">
+                        <canvas id = "operatingSystemsChart" style = "max-width:1210px; max-height: 460px;"></canvas>
+                        <div id="OperatingSystems_NotSet"></div>
+                    </div>
+                    <div class = "browsers_box">
+                        <canvas id = "browsersChart" style = "max-width:570px; max-height: 460px;"></canvas>
+                        <div id="Browsers_NotSet"></div>
+                    </div>
                 </div>
             </div>
             
@@ -1091,7 +1129,7 @@
                             });
 
                             const Browsers_NotSet_percent = (Browsers_NotSet_count / Browsers_Count) * 100;
-                            document.getElementById("Browsers_NotSet").textContent = Browsers_NotSet_percent + "%";
+                            document.getElementById("Browsers_NotSet").textContent = "Not Set: " + Browsers_NotSet_percent + "%";
                             
 
                             // _____________________________________ https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent _____________________________________
@@ -1181,7 +1219,7 @@
                             });
 
                             const Countries_NotSet_percent = (Countries_NotSet_count / Countries_Count) * 100;
-                            document.getElementById("Countries_NotSet").textContent = "Not Set: " + Countries_NotSet_percent + "%";
+                            document.getElementById("Countries_NotSet").textContent = "Not Set: " + Math.round(Countries_NotSet_percent) + "%";
                             document.getElementById("countriesReached").textContent = countries.length;
 
 
@@ -1260,7 +1298,7 @@
                                 }
 
                                 const Cities_NotSet_percent = (Cities_NotSet_count / Cities_Count) * 100;
-                                document.getElementById("Cities_NotSet").textContent = "Not Set: " + Cities_NotSet_percent + "%";
+                                document.getElementById("Cities_NotSet").textContent = "Not Set: " + Math.round(Cities_NotSet_percent) + "%";
                                 document.getElementById("citiesReached").textContent = cities.length;
                             });
                             
@@ -1352,7 +1390,7 @@
                             });
                             
                             const DeviceCategories_NotSet_percent = (DeviceCategories_NotSet_count / DeviceCategories_Count) * 100;
-                            document.getElementById("DeviceCategories_NotSet").textContent = "Not Set: " + DeviceCategories_NotSet_percent + "%";
+                            document.getElementById("DeviceCategories_NotSet").textContent = "Not Set: " + Math.round(DeviceCategories_NotSet_percent) + "%";
 
 
                             // ____________________________________________________________ DEVICE CATEGORIES PIE CHART ____________________________________________________________
@@ -1437,7 +1475,7 @@
                             });
                             
                             const DeviceModels_NotSet_percent = (DeviceModels_NotSet_count / DeviceModels_Count) * 100;
-                            document.getElementById("DeviceModels_NotSet").textContent = "Not Set: " + DeviceModels_NotSet_percent + "%";
+                            document.getElementById("DeviceModels_NotSet").textContent = "Not Set: " + Math.round(DeviceModels_NotSet_percent) + "%";
 
 
                             // ____________________________________________________________ DEVICE MODELS BAR CHART ____________________________________________________________
@@ -1523,7 +1561,7 @@
                             });
                             
                             const OperatingSystems_NotSet_percent = (OperatingSystems_NotSet_count / OperatingSystems_Count) * 100;
-                            document.getElementById("OperatingSystems_NotSet").textContent = "Not Set: " + OperatingSystems_NotSet_percent + "%";
+                            document.getElementById("OperatingSystems_NotSet").textContent = "Not Set: " + Math.round(OperatingSystems_NotSet_percent) + "%";
 
                             // ____________________________________________________________ OPERATING SYSTEMS BAR CHART ____________________________________________________________
                             // ___________________________________________ https://www.w3schools.com/js/js_graphics_chartjs.asp ___________________________________________
@@ -1617,7 +1655,7 @@
                             });
                             
                             const Regions_NotSet_percent = (Regions_NotSet_count / Regions_Count) * 100;
-                            document.getElementById("Regions_NotSet").textContent = "Not Set: " + Regions_NotSet_percent + "%";
+                            document.getElementById("Regions_NotSet").textContent = "Not Set: " + Math.round(Regions_NotSet_percent) + "%";
                             document.getElementById("regionsReached").textContent = regions.length;
 
                             // ____________________________________________________________ REGIONS PIE CHART ____________________________________________________________
